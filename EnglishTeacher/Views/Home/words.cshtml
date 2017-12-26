@@ -1,0 +1,50 @@
+﻿@model EnglishTeacher.Models.Word
+
+@{
+    ViewBag.Title = "words";
+}
+
+<h2>words</h2>
+
+<div>
+    <h4>Word</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.word1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.word1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.transcription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.transcription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.translate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.translate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Theme.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Theme.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+
+    @Html.ActionLink("Back to List", "Index")
+</p>

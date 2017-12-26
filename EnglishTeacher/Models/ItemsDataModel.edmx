@@ -1,0 +1,398 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="id_theme_day" Type="int" />
+          <Property Name="id_settings" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Lernt_words">
+          <Key>
+            <PropertyRef Name="id_lernt_word" />
+          </Key>
+          <Property Name="id_lernt_word" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="id_user" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="id_theme" Type="int" Nullable="false" />
+          <Property Name="id_word" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="id_setting" />
+          </Key>
+          <Property Name="id_setting" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="id_user" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="turn_on" Type="bit" Nullable="false" />
+          <Property Name="frequency" Type="float" Nullable="false" />
+          <Property Name="font_size" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Themes">
+          <Key>
+            <PropertyRef Name="id_theme" />
+          </Key>
+          <Property Name="id_theme" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="ntext" Nullable="false" />
+          <Property Name="level" Type="int" />
+        </EntityType>
+        <EntityType Name="Words">
+          <Key>
+            <PropertyRef Name="id_word" />
+          </Key>
+          <Property Name="id_word" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="id_theme" Type="int" Nullable="false" />
+          <Property Name="word" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="transcription" Type="varchar" MaxLength="50" />
+          <Property Name="translate" Type="ntext" Nullable="false" />
+        </EntityType>
+        <Association Name="id_theme">
+          <End Role="Themes" Type="Self.Themes" Multiplicity="1" />
+          <End Role="Words" Type="Self.Words" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Themes">
+              <PropertyRef Name="id_theme" />
+            </Principal>
+            <Dependent Role="Words">
+              <PropertyRef Name="id_theme" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_theme_lw">
+          <End Role="Themes" Type="Self.Themes" Multiplicity="1" />
+          <End Role="Lernt_words" Type="Self.Lernt_words" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Themes">
+              <PropertyRef Name="id_theme" />
+            </Principal>
+            <Dependent Role="Lernt_words">
+              <PropertyRef Name="id_theme" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_user">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Settings" Type="Self.Settings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Settings">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_user_lw">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Lernt_words" Type="Self.Lernt_words" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lernt_words">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_word">
+          <End Role="Words" Type="Self.Words" Multiplicity="1" />
+          <End Role="Lernt_words" Type="Self.Lernt_words" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Words">
+              <PropertyRef Name="id_word" />
+            </Principal>
+            <Dependent Role="Lernt_words">
+              <PropertyRef Name="id_word" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lernt_words" EntityType="Self.Lernt_words" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Themes" EntityType="Self.Themes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Words" EntityType="Self.Words" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="id_theme" Association="Self.id_theme">
+            <End Role="Themes" EntitySet="Themes" />
+            <End Role="Words" EntitySet="Words" />
+          </AssociationSet>
+          <AssociationSet Name="id_theme_lw" Association="Self.id_theme_lw">
+            <End Role="Themes" EntitySet="Themes" />
+            <End Role="Lernt_words" EntitySet="Lernt_words" />
+          </AssociationSet>
+          <AssociationSet Name="id_user" Association="Self.id_user">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Settings" EntitySet="Settings" />
+          </AssociationSet>
+          <AssociationSet Name="id_user_lw" Association="Self.id_user_lw">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Lernt_words" EntitySet="Lernt_words" />
+          </AssociationSet>
+          <AssociationSet Name="id_word" Association="Self.id_word">
+            <End Role="Words" EntitySet="Words" />
+            <End Role="Lernt_words" EntitySet="Lernt_words" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Lernt_words">
+          <Key>
+            <PropertyRef Name="id_lernt_word" />
+          </Key>
+          <Property Name="id_lernt_word" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_user" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_theme" Type="Int32" Nullable="false" />
+          <Property Name="id_word" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Theme" Relationship="Self.id_theme_lw" FromRole="Lernt_words" ToRole="Themes" />
+          <NavigationProperty Name="Word" Relationship="Self.id_word" FromRole="Lernt_words" ToRole="Words" />
+          <NavigationProperty Name="AspNetUser" Relationship="Model.id_user_lw" FromRole="Lernt_words" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="id_setting" />
+          </Key>
+          <Property Name="id_setting" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_user" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="turn_on" Type="Boolean" Nullable="false" />
+          <Property Name="frequency" Type="Double" Nullable="false" />
+          <Property Name="font_size" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Model.id_user" FromRole="Setting" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="Theme">
+          <Key>
+            <PropertyRef Name="id_theme" />
+          </Key>
+          <Property Name="id_theme" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="level" Type="Int32" />
+          <NavigationProperty Name="Lernt_words" Relationship="Self.id_theme_lw" FromRole="Themes" ToRole="Lernt_words" />
+          <NavigationProperty Name="Words" Relationship="Self.id_theme" FromRole="Themes" ToRole="Words" />
+        </EntityType>
+        <EntityType Name="Word">
+          <Key>
+            <PropertyRef Name="id_word" />
+          </Key>
+          <Property Name="id_word" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_theme" Type="Int32" Nullable="false" />
+          <Property Name="word1" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="transcription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="translate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Lernt_words" Relationship="Self.id_word" FromRole="Words" ToRole="Lernt_words" />
+          <NavigationProperty Name="Theme" Relationship="Self.id_theme" FromRole="Words" ToRole="Themes" />
+        </EntityType>
+        <Association Name="id_theme_lw">
+          <End Role="Themes" Type="Self.Theme" Multiplicity="1" />
+          <End Role="Lernt_words" Type="Self.Lernt_words" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Themes">
+              <PropertyRef Name="id_theme" />
+            </Principal>
+            <Dependent Role="Lernt_words">
+              <PropertyRef Name="id_theme" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_word">
+          <End Role="Words" Type="Self.Word" Multiplicity="1" />
+          <End Role="Lernt_words" Type="Self.Lernt_words" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Words">
+              <PropertyRef Name="id_word" />
+            </Principal>
+            <Dependent Role="Lernt_words">
+              <PropertyRef Name="id_word" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_theme">
+          <End Role="Themes" Type="Self.Theme" Multiplicity="1" />
+          <End Role="Words" Type="Self.Word" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Themes">
+              <PropertyRef Name="id_theme" />
+            </Principal>
+            <Dependent Role="Words">
+              <PropertyRef Name="id_theme" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Lernt_words" EntityType="Self.Lernt_words" />
+          <EntitySet Name="Settings" EntityType="Self.Setting" />
+          <EntitySet Name="Themes" EntityType="Self.Theme" />
+          <EntitySet Name="Words" EntityType="Self.Word" />
+          <AssociationSet Name="id_theme_lw" Association="Self.id_theme_lw">
+            <End Role="Themes" EntitySet="Themes" />
+            <End Role="Lernt_words" EntitySet="Lernt_words" />
+          </AssociationSet>
+          <AssociationSet Name="id_word" Association="Self.id_word">
+            <End Role="Words" EntitySet="Words" />
+            <End Role="Lernt_words" EntitySet="Lernt_words" />
+          </AssociationSet>
+          <AssociationSet Name="id_theme" Association="Self.id_theme">
+            <End Role="Themes" EntitySet="Themes" />
+            <End Role="Words" EntitySet="Words" />
+          </AssociationSet>
+          <EntitySet Name="AspNetUsers" EntityType="Model.AspNetUser" />
+          <AssociationSet Name="id_user" Association="Model.id_user">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Setting" EntitySet="Settings" />
+          </AssociationSet>
+          <AssociationSet Name="id_user_lw" Association="Model.id_user_lw">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Lernt_words" EntitySet="Lernt_words" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="id_theme_day" Type="Int32" />
+          <Property Name="id_settings" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Settings" Relationship="Model.id_user" FromRole="AspNetUser" ToRole="Setting" />
+          <NavigationProperty Name="Lernt_words" Relationship="Model.id_user_lw" FromRole="AspNetUser" ToRole="Lernt_words" />
+        </EntityType>
+        <Association Name="id_user">
+          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="Model.Setting" Role="Setting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Setting">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_user_lw">
+          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="Model.Lernt_words" Role="Lernt_words" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lernt_words">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Lernt_words">
+            <EntityTypeMapping TypeName="Model.Lernt_words">
+              <MappingFragment StoreEntitySet="Lernt_words">
+                <ScalarProperty Name="id_lernt_word" ColumnName="id_lernt_word" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_theme" ColumnName="id_theme" />
+                <ScalarProperty Name="id_word" ColumnName="id_word" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="Model.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="id_setting" ColumnName="id_setting" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="turn_on" ColumnName="turn_on" />
+                <ScalarProperty Name="frequency" ColumnName="frequency" />
+                <ScalarProperty Name="font_size" ColumnName="font_size" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Themes">
+            <EntityTypeMapping TypeName="Model.Theme">
+              <MappingFragment StoreEntitySet="Themes">
+                <ScalarProperty Name="id_theme" ColumnName="id_theme" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="level" ColumnName="level" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Words">
+            <EntityTypeMapping TypeName="Model.Word">
+              <MappingFragment StoreEntitySet="Words">
+                <ScalarProperty Name="id_word" ColumnName="id_word" />
+                <ScalarProperty Name="id_theme" ColumnName="id_theme" />
+                <ScalarProperty Name="word1" ColumnName="word" />
+                <ScalarProperty Name="transcription" ColumnName="transcription" />
+                <ScalarProperty Name="translate" ColumnName="translate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="Model.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="id_settings" ColumnName="id_settings" />
+                <ScalarProperty Name="id_theme_day" ColumnName="id_theme_day" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

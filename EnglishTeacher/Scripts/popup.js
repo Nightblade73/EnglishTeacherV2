@@ -17,20 +17,21 @@
 //        });
 //    }, false);
 //}, false);
-var preloader = $('#wrapped');
-var tokenKey = "tokenInfo";
-var user = getCookie("username");
-var password = getCookie("password");
-if (user || password) {
-    var email = getCookie("username");
-    var password = getCookie("password");
-    login(email, password, preloader, function (data) {
-        sessionStorage.setItem(tokenKey, data.access_token);
-        document.location.href = "main.html";
-    });
 
-} else {
+var tokenKey = "tokenInfo";
+//var user = getCookie("username");
+//var password = getCookie("password");
+//if (user || password) {
+//    var email = getCookie("username");
+//    var password = getCookie("password");
+//    login(email, password, preloader, function (data) {
+//        sessionStorage.setItem(tokenKey, data.access_token);
+//        document.location.href = "main.html";
+//    });
+
+//} else {
     $(document).ready(function () {
+        var preloader = $('#wrapped');
         $('#but-Sign-In').click(function (e) {
             e.preventDefault();
             var email = $('#emailLogin').val();
@@ -42,8 +43,49 @@ if (user || password) {
                 document.location.href = "main.html";
             });
         });
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:54049/api/Models/GetWords',
+            //     datatype: 'jsonp',
+            beforeSend: function (xhr) {
+                //     preloader.css('display', 'block');
+            },
+            success: function (data) {
+                //  alert(data[Math.round(0 - 0.5 + Math.random() * (data.length))].word1);
+                var r = Math.round(0 - 0.5 + Math.random() * (data.length));
+                document.getElementById("newWord").innerHTML = data[r].word1;
+                document.getElementById("transcription").innerHTML = data[r].transcription;
+                document.getElementById("translate").innerHTML = data[r].translate;
+                //    $('#lbl').text = (data[Math.round(0 - 0.5 + Math.random() * (data.length))].word1);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText || textStatus);
+            }
+        });
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:54049/api/Models/GetThemes',
+            //     datatype: 'jsonp',
+            beforeSend: function (xhr) {
+                // preloader.css('display', 'block');
+            },
+            success: function (data) {
+                // console.log(data);
+                //  var cityData = result.Data;
+                var defaultV = new Option("--Select--", 0, true);
+                $('#selectTheme').empty();
+                $('#selectTheme').append(defaultV);
+                for (var i = 0; i < data.length; i++) {
+                    var opt = new Option(data[i].name, data[i].id_theme, false);
+                    $('#selectTheme').append(opt);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText || textStatus);
+            }
+        });
     });
-}
+//}
 
 $(function () {
     
@@ -152,14 +194,39 @@ $(function () {
         e.preventDefault();
         $.ajax({
             type: 'GET',
-            url: 'http://localhost:54049/api/Values/GetValues',
+            url: 'http://localhost:54049/api/Models/GetWords',
             //     datatype: 'jsonp',
             beforeSend: function (xhr) {
-                var token = sessionStorage.getItem(tokenKey);
-                xhr.setRequestHeader("Authorization", "Bearer " + token);
+           //     preloader.css('display', 'block');
             },
             success: function (data) {
-                alert(data);
+                //   console.log(data);
+                for (var i = 0; i < data.length; i++) {
+                  alert(data[i].word1);
+                }
+                 
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText || textStatus);
+            }
+        });
+    });
+    //  $('#getNewWordTry').click(    function (e) {
+       //    e.preventDefault();
+
+ //   });
+   //   $('#Themes').click(function (e) {
+    
+    //    e.preventDefault();
+       
+ //   });
+    $('#no').click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            beforeSend: function (xhr) { 
+            },
+            success: function (data) {
+                window.close();
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(jqXHR.responseText || textStatus);

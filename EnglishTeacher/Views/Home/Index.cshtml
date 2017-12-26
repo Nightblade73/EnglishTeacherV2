@@ -20,6 +20,15 @@
     <input type="password" id="confirmpassword" /><br /><br />
     <input type="submit" id="submit" value="Регистрация" />
 </div>
+<div>
+    <ol>
+        @foreach (EnglishTeacher.Models.Word item in ViewBag.Items)
+        {
+            <li> @Html.ActionLink(""+@item.word1, "Words", new { id = item.id_word })</li>
+        }
+       
+    </ol>
+</div>
 @section scripts{
     <script type="text/javascript">
         $(function () {
