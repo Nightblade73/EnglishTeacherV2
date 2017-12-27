@@ -1,6 +1,6 @@
 ﻿function extenApi() {
     this.login = function login(email, password, eventSuccess, eventError) {
-        var loginData = {
+        let loginData = {
             grant_type: 'password',
             username: email,
             password: password
@@ -18,7 +18,7 @@
     }
 
     this.registration = function registration(email, password, confirmPassword, eventSuccess, eventError) {
-        var data = {
+        let data = {
             Email: email,
             Password: password,
             ConfirmPassword: confirmPassword
@@ -37,7 +37,7 @@
     }
 
     this.forrgotPassword = function forrgotPass(email, eventSuccess, eventError) {
-        var data = {
+        let data = {
             Email: email,
         };
         $.ajax({
@@ -45,6 +45,26 @@
             url: 'http://localhost:54049/api/Account/ForgotPassword/',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data),
+            success: eventSuccess,
+            fail: function (data) {
+                alert(data.responseText);
+            },
+            error: eventError
+        });
+    }
+
+    this.saveSettings = function saveSettings(id_theme, token, eventSuccess, eventError) {
+        let data = {
+            Id_theme: id_theme,
+        };
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:54049/api/Models/SaveTheme/',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
             success: eventSuccess,
             fail: function (data) {
                 alert(data.responseText);

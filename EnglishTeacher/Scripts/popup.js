@@ -1,45 +1,7 @@
-﻿//document.addEventListener('DOMContentLoaded', function () {
-//    var checkPageButton = document.getElementById('checkPage');
-//    checkPageButton.addEventListener('click', function () {
-//        chrome.tabs.getSelected(null, function (tab) {
-//            d = document;
-
-//            var f = d.createElement('form');
-//            f.action = 'http://gtmetrix.com/analyze.html?bm';
-//            f.method = 'post';
-//            var i = d.createElement('input');
-//            i.type = 'hidden';
-//            i.name = 'url';
-//            i.value = tab.url;
-//            f.appendChild(i);
-//            d.body.appendChild(f);
-//            f.submit();
-//        });
-//    }, false);
-//}, false);
-
-
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
     var ex = new extenApi();
     var tokenKey = "tokenInfo";
-    //$('#but-Sign-In').click(function (e) {
-    //    e.preventDefault();
-    //    let email = $('#emailLogin').val();
-    //    let password = $('#passwordLogin').val();
-    //    $('#wrapped').css('display', 'block');
-    //    ex.login(email, password, function (data) {
-    //        sessionStorage.setItem(tokenKey, data.access_token);
-    //        setCookie("username", email);
-    //        setCookie("password", password);
-    //        $('#wrapped').css('display', 'none');
-    //        document.location.href = "main.html";
-    //    }, function (jqXHR, textStatus, errorThrown) {
-    //        $('#wrapped').css('display', 'none');
-    //        alert(jqXHR.responseText || textStatus);
-    //    });
-    //});
-
+    
     //$.ajax({
     //    type: 'GET',
     //    url: 'http://localhost:54049/api/Models/GetWords',
@@ -62,6 +24,7 @@ $(document).ready(function () {
     //        alert(jqXHR.responseText || textStatus);
     //    }
     //});
+   
     $.ajax({
         type: 'GET',
         url: 'http://localhost:54049/api/Models/GetThemes',
@@ -127,27 +90,27 @@ $(document).ready(function () {
         }, 500);
     });
 
-    $('#getItemsButton').click(function (e) {
-        e.preventDefault();
-        $.ajax({
-            type: 'GET',
-            url: 'http://localhost:54049/api/Models/GetWords',
-            //     datatype: 'jsonp',
-            beforeSend: function (xhr) {
-                //     preloader.css('display', 'block');
-            },
-            success: function (data) {
-                //   console.log(data);
-                for (let i = 0; i < data.length; i++) {
-                    alert(data[i].translate);
-                }
+    //$('#getItemsButton').click(function (e) {
+    //    e.preventDefault();
+    //    $.ajax({
+    //        type: 'GET',
+    //        url: 'http://localhost:54049/api/Models/GetWords',
+    //        //     datatype: 'jsonp',
+    //        beforeSend: function (xhr) {
+    //            //     preloader.css('display', 'block');
+    //        },
+    //        success: function (data) {
+    //            //   console.log(data);
+    //            for (let i = 0; i < data.length; i++) {
+    //                alert(data[i].translate);
+    //            }
 
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(jqXHR.responseText || textStatus);
-            }
-        });
-    });
+    //        },
+    //        error: function (jqXHR, textStatus, errorThrown) {
+    //            alert(jqXHR.responseText || textStatus);
+    //        }
+    //    });
+    //});
     //   $('#getNewWordTry').click(    function (e) {
     //        e.preventDefault();
 
@@ -159,28 +122,14 @@ $(document).ready(function () {
     //   });
     $('#btn-Save').click(function (e) {
         e.preventDefault();
-        var data = {
-            Id_theme: $('#selectTheme').val()
-        };
-        $.ajax({
-            type: 'POST',
-            url: 'http://localhost:54049/api/Models/SaveTheme/',
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(data),
-            beforeSend: function (xhr) {
-                var token = sessionStorage.getItem(tokenKey);
-                xhr.setRequestHeader("Authorization", "Bearer " + token);
-            },
-            success: function (data) {
-                console.log(data);
-
-
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
+        ex.saveSettings($('#selectTheme').val(), sessionStorage.getItem(tokenKey),
+            function () {
+                document.location.href = "main.html";
+            }, function (jqXHR, textStatus, errorThrown) {
                 alert(jqXHR.responseText || textStatus);
-            }
-        });
+            });
     });
+
     $('#no').click(function (e) {
         e.preventDefault();
         $.ajax({
@@ -215,7 +164,7 @@ $(document).ready(function () {
             }
         });
     });
-    /////////////////////////////////////дальше код, который пока не подключён
+
     $('#logOut').click(function (e) {
         e.preventDefault();
         sessionStorage.removeItem(tokenKey);
@@ -225,8 +174,3 @@ $(document).ready(function () {
     });
 
 });
-
-//document.addEventListener('DOMContentLoaded', function () {
-//    document.querySelector('#submitLogin').addEventListener('click', clickHandler);
-//    main();
-//});
