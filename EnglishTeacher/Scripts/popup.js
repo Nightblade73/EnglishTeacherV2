@@ -43,26 +43,26 @@ var tokenKey = "tokenInfo";
                 document.location.href = "main.html";
             });
         });
-        //$.ajax({
-        //    type: 'GET',
-        //    url: 'http://localhost:54049/api/Models/GetWords',
-        //    //     datatype: 'jsonp',
-        //    beforeSend: function (xhr) {
-        //        //     preloader.css('display', 'block');
-        //    },
-        //    success: function (data) {
-        //        //  alert(data[Math.round(0 - 0.5 + Math.random() * (data.length))].word1);
-        //        var r = Math.round(0 - 0.5 + Math.random() * (data.length));
-        //        document.getElementById("newWord").innerHTML = data[r].word1;
-        //        document.getElementById("transcription").innerHTML = data[r].transcription;
-        //        document.getElementById("translate").innerHTML = data[r].translate;
-        //        sessionStorage.setItem(tokenKey, data.access_token);
-        //        //    $('#lbl').text = (data[Math.round(0 - 0.5 + Math.random() * (data.length))].word1);
-        //    },
-        //    error: function (jqXHR, textStatus, errorThrown) {
-        //        alert(jqXHR.responseText || textStatus);
-        //    }
-        //});
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:54049/api/Models/GetWords',
+            //     datatype: 'jsonp',
+            beforeSend: function (xhr) {
+                //     preloader.css('display', 'block');
+            },
+            success: function (data) {
+                //  alert(data[Math.round(0 - 0.5 + Math.random() * (data.length))].word1);
+                var r = Math.round(0 - 0.5 + Math.random() * (data.length));
+                document.getElementById("newWord").innerHTML = data[r].word1;
+                document.getElementById("transcription").innerHTML = data[r].transcription;
+                document.getElementById("translate").innerHTML = data[r].translate;
+                sessionStorage.setItem(tokenKey, data.access_token);
+                //    $('#lbl').text = (data[Math.round(0 - 0.5 + Math.random() * (data.length))].word1);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText || textStatus);
+            }
+        });
         //$.ajax({
         //    type: 'GET',
         //    url: 'http://localhost:54049/api/Models/GetThemes',

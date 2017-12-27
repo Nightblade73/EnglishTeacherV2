@@ -5,10 +5,10 @@ namespace EnglishTeacher.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class Model1 : DbContext
+    public partial class DataModel : DbContext
     {
-        public Model1()
-            : base("name=Model1")
+        public DataModel()
+            : base("name=DataModel")
         {
         }
 

@@ -14,7 +14,7 @@ namespace EnglishTeacher.Controllers
     public class ModelController : ApiController
     {
 
-        Model1 entities = new Model1();
+        DataModel entities = new DataModel();
         
         [HttpGet]
         [Route("GetWords")]

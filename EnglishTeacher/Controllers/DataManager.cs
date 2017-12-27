@@ -9,10 +9,10 @@ namespace EnglishTeacher.Models
     [RoutePrefix("api/Models")]
     public class DataManager
     {
-       Model1 entities;
+       DataModel entities;
 
         public DataManager() {
-            entities = new Model1();
+            entities = new DataModel();
         }
         [HttpGet]
         [Route("GetWords")]
