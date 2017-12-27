@@ -90,6 +90,7 @@
         }, 500);
     });
 
+
     //$('#getItemsButton').click(function (e) {
     //    e.preventDefault();
     //    $.ajax({
@@ -111,6 +112,14 @@
     //        }
     //    });
     //});
+
+    $('#ok').click(function () {
+        $('#wrapped').fadeOut('1000');
+        setTimeout(function () {
+            $('#main-section').fadeIn('1000');
+        }, 500);
+    });
+
     //   $('#getNewWordTry').click(    function (e) {
     //        e.preventDefault();
 

@@ -321,6 +321,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\185095 %284%29.ico" />
+    <Content Include="Images\consulting.ico" />
     <Content Include="Images\logout.ico" />
     <Content Include="Images\set.ico" />
     <Content Include="Images\preloader.gif" />
