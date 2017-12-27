@@ -38,6 +38,7 @@ body {
     font-size: 20px;
     text-align: center;
 }
+
 .main {
     /*background: #200122;
     background: -webkit-linear-gradient(to bottom, #2e3a6a,#2f0b45);
@@ -51,6 +52,7 @@ body {
     height: 200px;
     /*padding: 0;*/
 }
+
     .main:before {
         /*content: "";
         width: 100%;
@@ -61,6 +63,7 @@ body {
         /*background: linear-gradient(#2e3a6a,#2f0b45);
         opacity: 0.85;*/
     }
+
 .setting {
     background: #200122;
     width: 400px;
@@ -140,36 +143,37 @@ a:hover, a:focus {
                 position: relative;
                 transition: all 0.5s ease 0s;
             }
-            .tab .nav-tabs p.sett {
-                font-size: 18px;
-                font-weight : bold;
-                color: white;
-                /*border-radius: 0;*/
-                text-transform: uppercase;
-                background: transparent;
-                padding: 0;
-                margin-right: 0;
-                border: none;
-                border-bottom: 2px solid transparent;
-                /*opacity: 0.5;*/
-                /*position: relative;
+
+        .tab .nav-tabs p.sett {
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            /*border-radius: 0;*/
+            text-transform: uppercase;
+            background: transparent;
+            padding: 0;
+            margin-right: 0;
+            border: none;
+            border-bottom: 2px solid transparent;
+            /*opacity: 0.5;*/
+            /*position: relative;
                 transition: all 0.5s ease 0s;*/
-                text-align: center;
-            }
+            text-align: center;
+        }
 
-                .tab .nav-tabs li a:hover {
-                    background: transparent;
-                }
+        .tab .nav-tabs li a:hover {
+            background: transparent;
+        }
 
-            .tab .nav-tabs li.active a,
-            .tab .nav-tabs li.active a:focus,
-            .tab .nav-tabs li.active a:hover {
-                border: none;
-                background: transparent;
-                opacity: 1;
-                border-bottom: 2px solid #eec111;
-                color: #fff;
-            }
+        .tab .nav-tabs li.active a,
+        .tab .nav-tabs li.active a:focus,
+        .tab .nav-tabs li.active a:hover {
+            border: none;
+            background: transparent;
+            opacity: 1;
+            border-bottom: 2px solid #eec111;
+            color: #fff;
+        }
 
     .tab .tab-content {
         padding: 10px 0 0 0;
@@ -203,7 +207,7 @@ a:hover, a:focus {
 
 .form-horizontal select {
     height: 40px;
-    width:130px;
+    width: 130px;
     /*background: rgba(255,255,255,0.2);*/
     border: none;
     /*border-radius: 20px;*/
@@ -213,8 +217,8 @@ a:hover, a:focus {
     font-weight: bold;
     /*color: #fff;*/
     transition: all 0.3s ease 0s;
-    position :absolute;
-    right : 0px;
+    position: absolute;
+    right: 0px;
 }
 
 .form-control:focus {
@@ -226,7 +230,6 @@ a:hover, a:focus {
     box-shadow: none;
     outline: 0 none;
     /*border-radius: 20px 20px 0 0;*/
-    
 }
 
 .form-group label {
@@ -369,36 +372,13 @@ a:hover, a:focus {
 }
 
 .setLogo {
-    /*display: flex;*/
-    /*align-items: center;
-        justify-content: center;*/
-    /*display: inline-block;*/
-    /*position: absolute;*/
-    /*left: 0;
-        bottom: 0;*/
-    /*box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;*/
-    /*color: #fff;*/
-    /*padding: 10px;*/
-    /*background-color: rgba(0,0,0,.3);*/
-    /*text-align: center;*/
-    /*width: 100%;
-        height: 32%;*/
     display: inline-block;
     position: absolute;
-    text-transform: uppercase;
-    top: 0%;
-    /*left: 77%;*/
-    right: 0px;
-    /*right : 1%;*/
-    /*color: #FFF;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 20px;
-        background-color: rgba(0,0,0,.4);*/
-    padding: 10px 10px;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
 }
+
 
 .yesno {
     font-size: 18px;
@@ -424,7 +404,7 @@ a:hover, a:focus {
 }*/
 #yes:focus, #yes:hover {
     color: #eec111; /* Цвет ссылки */
-    cursor : pointer;
+    cursor: pointer;
 }
 
 #yes {
@@ -432,22 +412,24 @@ a:hover, a:focus {
     margin: 10px;
 }
 
-    #no:focus, #no:hover {
-        color: #eec111; /* Цвет ссылки */
-        cursor: pointer;
-    }
+#no:focus, #no:hover {
+    color: #eec111; /* Цвет ссылки */
+    cursor: pointer;
+}
 
 #no {
     color: white;
     margin: 10px;
 }
+
 .selectbox {
-    
     color: black;
 }
+
 .form-group select {
     margin-right: 30px;
 }
+
 .set {
     /*border: none;
     background: transparent;
@@ -467,6 +449,7 @@ a:hover, a:focus {
     position: relative;
     transition: all 0.5s ease 0s;
 }
+
 h3 {
     justify-content: center;
     /*top: 30%;*/
@@ -481,24 +464,27 @@ span {
     text-align: center;
     font-size: 18px;
 }
+
 .text_prim label {
     justify-content: center;
     /*top: 30%;*/
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
-    
     margin: 0 auto;
 }
+
 .transl_transc {
     justify-content: center;
     text-align: center;
     font-size: 18px;
 }
+
 .word {
     justify-content: center;
     text-align: center;
     font-size: 30px;
 }
+
 @media only screen and (max-width: 479px) {
     .tab {
         padding: 40px 20px;

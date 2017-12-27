@@ -36,4 +36,20 @@
         });
     }
 
+    this.forrgotPassword = function forrgotPass(email, eventSuccess, eventError) {
+        var data = {
+            Email: email,
+        };
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:54049/api/Account/ForgotPassword/',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data),
+            success: eventSuccess,
+            fail: function (data) {
+                alert(data.responseText);
+            },
+            error: eventError
+        });
+    }
 }
