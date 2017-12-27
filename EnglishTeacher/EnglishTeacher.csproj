@@ -262,7 +262,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModelController.cs" />
-    <Compile Include="Controllers\ThemesController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -274,6 +273,7 @@
     <Compile Include="Models\Lernt_words.cs" />
     <Compile Include="Models\DataModel.cs" />
     <Compile Include="Models\Theme.cs" />
+    <Compile Include="Models\ThemeBindingModel.cs" />
     <Compile Include="Models\Word.cs" />
     <Compile Include="Models\WordModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

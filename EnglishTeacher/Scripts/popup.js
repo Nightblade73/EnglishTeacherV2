@@ -182,6 +182,7 @@ $(document).ready(function () {
     });
     $('#getItemsButton').click(function (e) {
         e.preventDefault();
+        
         $.ajax({
             type: 'GET',
             url: 'http://localhost:54049/api/Models/GetWords',
@@ -227,15 +228,42 @@ $(document).ready(function () {
 
     $('#yes').click(function (e) {
         e.preventDefault();
+        
         $.ajax({
-         //   url: 'http://localhost:54049/api/Models/HaveLerntWord',
+         //   url: 'http://localhost:54049/api/Models/HaveLerntWord/',
+            type: 'GET',
+            url: 'http://localhost:54049/api/Models/GetUserId/',
             beforeSend: function (xhr) {             
                     var token = sessionStorage.getItem(tokenKey);
-                    xhr.setRequestHeader("Authorization", "Bearer " + token);              
+                    xhr.setRequestHeader("Authorization", "Bearer " + token); 
             },
-            success: function () {
-               console.log("OK!");
+            success: function (data) {
+               console.log(data);
                
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText || textStatus);
+            }
+        });
+    });
+    $('#btn-Save').click(function (e) {
+        e.preventDefault();
+            var data = {
+                Id_theme: $('#selectTheme').val()
+            };
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:54049/api/Models/SaveTheme/',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data),
+            beforeSend: function (xhr) {
+                var token = sessionStorage.getItem(tokenKey);
+                xhr.setRequestHeader("Authorization", "Bearer " + token);  
+            },
+            success: function (data) {
+                   console.log(data);
+                
+
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(jqXHR.responseText || textStatus);
