@@ -1,4 +1,6 @@
 ﻿using EnglishTeacher.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +14,8 @@ namespace EnglishTeacher.Controllers
     public class ModelController : ApiController
     {
 
-        Entities entities = new Entities();
-
+        Model1 entities = new Model1();
+        
         [HttpGet]
         [Route("GetWords")]
         public IEnumerable<Word> GetWords()
@@ -30,7 +32,14 @@ namespace EnglishTeacher.Controllers
                             select w;
             return needWords;
         }
-
+        //вызывается почему то пустым 
+        [HttpGet]
+        [Route("GetUserId")]
+        public string GetUserId()
+        {
+           
+            return User.Identity.GetUserId();
+        }
 
 
         public Word GetWord(string id)

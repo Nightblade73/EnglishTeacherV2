@@ -269,38 +269,13 @@
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>ItemsDataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\DataManager.cs" />
+    <Compile Include="Models\AspNetUser.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ItemsDataModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ItemsDataModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ItemsDataModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ItemsDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ItemsDataModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ItemsDataModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Lernt_words.cs">
-      <DependentUpon>ItemsDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Setting.cs">
-      <DependentUpon>ItemsDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Theme.cs">
-      <DependentUpon>ItemsDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Word.cs">
-      <DependentUpon>ItemsDataModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Lernt_words.cs" />
+    <Compile Include="Models\Model1.cs" />
+    <Compile Include="Models\Theme.cs" />
+    <Compile Include="Models\Word.cs" />
     <Compile Include="Models\WordModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -353,24 +328,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <EntityDeploy Include="Models\ItemsDataModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ItemsDataModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ItemsDataModel.edmx.diagram">
-      <DependentUpon>ItemsDataModel.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
-    <Content Include="Models\ItemsDataModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ItemsDataModel.edmx</DependentUpon>
-      <LastGenOutput>ItemsDataModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ItemsDataModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ItemsDataModel.edmx</DependentUpon>
-      <LastGenOutput>ItemsDataModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\cookie.js" />

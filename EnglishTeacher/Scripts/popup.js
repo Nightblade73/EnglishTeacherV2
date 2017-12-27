@@ -43,47 +43,49 @@ var tokenKey = "tokenInfo";
                 document.location.href = "main.html";
             });
         });
-        $.ajax({
-            type: 'GET',
-            url: 'http://localhost:54049/api/Models/GetWords',
-            //     datatype: 'jsonp',
-            beforeSend: function (xhr) {
-                //     preloader.css('display', 'block');
-            },
-            success: function (data) {
-                //  alert(data[Math.round(0 - 0.5 + Math.random() * (data.length))].word1);
-                var r = Math.round(0 - 0.5 + Math.random() * (data.length));
-                document.getElementById("newWord").innerHTML = data[r].word1;
-                document.getElementById("transcription").innerHTML = data[r].transcription;
-                document.getElementById("translate").innerHTML = data[r].translate;
-                //    $('#lbl').text = (data[Math.round(0 - 0.5 + Math.random() * (data.length))].word1);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(jqXHR.responseText || textStatus);
-            }
-        });
-        $.ajax({
-            type: 'GET',
-            url: 'http://localhost:54049/api/Models/GetThemes',
-            //     datatype: 'jsonp',
-            beforeSend: function (xhr) {
-                // preloader.css('display', 'block');
-            },
-            success: function (data) {
-                // console.log(data);
-                //  var cityData = result.Data;
-                var defaultV = new Option("--Select--", 0, true);
-                $('#selectTheme').empty();
-                $('#selectTheme').append(defaultV);
-                for (var i = 0; i < data.length; i++) {
-                    var opt = new Option(data[i].name, data[i].id_theme, false);
-                    $('#selectTheme').append(opt);
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(jqXHR.responseText || textStatus);
-            }
-        });
+        //$.ajax({
+        //    type: 'GET',
+        //    url: 'http://localhost:54049/api/Models/GetWords',
+        //    //     datatype: 'jsonp',
+        //    beforeSend: function (xhr) {
+        //        //     preloader.css('display', 'block');
+        //    },
+        //    success: function (data) {
+        //        //  alert(data[Math.round(0 - 0.5 + Math.random() * (data.length))].word1);
+        //        var r = Math.round(0 - 0.5 + Math.random() * (data.length));
+        //        document.getElementById("newWord").innerHTML = data[r].word1;
+        //        document.getElementById("transcription").innerHTML = data[r].transcription;
+        //        document.getElementById("translate").innerHTML = data[r].translate;
+        //        sessionStorage.setItem(tokenKey, data.access_token);
+        //        //    $('#lbl').text = (data[Math.round(0 - 0.5 + Math.random() * (data.length))].word1);
+        //    },
+        //    error: function (jqXHR, textStatus, errorThrown) {
+        //        alert(jqXHR.responseText || textStatus);
+        //    }
+        //});
+        //$.ajax({
+        //    type: 'GET',
+        //    url: 'http://localhost:54049/api/Models/GetThemes',
+        //    //     datatype: 'jsonp',
+        //    beforeSend: function (xhr) {
+        //        // preloader.css('display', 'block');
+        //    },
+        //    success: function (data) {
+        //        // console.log(data);
+        //        //  var cityData = result.Data;
+        //        var defaultV = new Option("--Select--", 0, true);
+        //        $('#selectTheme').empty();
+        //        $('#selectTheme').append(defaultV);
+        //        for (var i = 0; i < data.length; i++) {
+        //            var opt = new Option(data[i].name, data[i].id_theme, false);
+        //            $('#selectTheme').append(opt);
+        //        }
+        //        sessionStorage.setItem(tokenKey, data.access_token);
+        //    },
+        //    error: function (jqXHR, textStatus, errorThrown) {
+        //        alert(jqXHR.responseText || textStatus);
+        //    }
+        //});
     });
 //}
 
@@ -103,10 +105,10 @@ $(function () {
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data),
             beforeSend: function () {
-                preloader.css('display', 'block');
+              //  preloader.css('display', 'block');
             },
             complete: function () {
-                preloader.css('display', 'none');
+             //   preloader.css('display', 'none');
             },
             success: function (data) {
                 alert("Всё норм");
@@ -226,7 +228,29 @@ $(function () {
             beforeSend: function (xhr) { 
             },
             success: function (data) {
+                chrome.browserAction.setBadgeText({ text: "" });
                 window.close();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText || textStatus);
+            }
+        });
+    });
+
+    $('#yes').click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:54049/api/Models/GetUserId',
+            beforeSend: function (xhr) {
+              
+                    var token = sessionStorage.getItem(tokenKey);
+                    xhr.setRequestHeader("Authorization", "Bearer " + token);
+                
+            },
+            success: function (data) {
+               console.log(data);
+               
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(jqXHR.responseText || textStatus);
