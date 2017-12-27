@@ -32,20 +32,37 @@ namespace EnglishTeacher.Controllers
                             select w;
             return needWords;
         }
-        //вызывается почему то пустым 
+        
         [HttpGet]
         [Route("GetUserId")]
         public string GetUserId()
-        {
-           
+        {           
             return User.Identity.GetUserId();
         }
 
-
-        public Word GetWord(string id)
+        [HttpGet]
+        [Route("GetWordByWord")]
+        public string GetWord(string word)
         {
-            return entities.Words.SingleOrDefault(w => w.id_word == id);
+            return entities.Words.SingleOrDefault(w => w.word1 == word).id_word;
         }
+
+       
+
+        [HttpGet]
+        [Route("HaveLerntWord")]
+        public string HaveLerntWord(string word)
+        {
+            Lernt_words lw = new Lernt_words
+            {
+                id_word = GetWord("caw"),
+                id_user = GetUserId()
+            };
+            entities.Lernt_words.Add(lw);
+            entities.SaveChanges();
+            return "OK";
+        }
+
 
         [HttpGet]
         [Route("GetThemes")]
@@ -54,5 +71,10 @@ namespace EnglishTeacher.Controllers
             return entities.Themes;
         }
 
+
+        public Word GetWordById(string id)
+        {
+            return entities.Words.SingleOrDefault(w => w.id_word == id);
+        }
     }
 }

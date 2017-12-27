@@ -12,26 +12,26 @@ namespace EnglishTeacher.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
-            DataManager dataManager = new DataManager();
-            ViewBag.Items = dataManager.GetWords();
+         //   DataManager dataManager = new DataManager();
+         //   ViewBag.Items = dataManager.GetWords();
             return View();
         }
-        public ActionResult Words(string id)
-        {
-            DataManager dataManager = new DataManager();
-            ViewBag.Items = dataManager.GetWords();
+        //public ActionResult Words(string id)
+        //{
+        // //   DataManager dataManager = new DataManager();
+        // //   ViewBag.Items = dataManager.GetWords();
 
-            return View(dataManager.GetWord(id));
-        }
+        // //   return View(dataManager.GetWordById(id));
+        //}
 
-        [HttpGet]
-        [AllowAnonymous]
-        public ActionResult Themes()
-        {
-            DataManager dataManager = new DataManager();
-            ViewBag.Themes = dataManager.GetThemes();
+        //[HttpGet]
+        //[AllowAnonymous]
+        //public ActionResult Themes()
+        //{
+        //    DataManager dataManager = new DataManager();
+        //    ViewBag.Themes = dataManager.GetThemes();
 
-            return View();
-        }
+        //    return View();
+        //}
     }
 }
