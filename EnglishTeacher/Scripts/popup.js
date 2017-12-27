@@ -17,7 +17,7 @@
 //        });
 //    }, false);
 //}, false);
-//
+
 //var user = getCookie("username");
 //var password = getCookie("password");
 //if (user || password) {
@@ -48,7 +48,52 @@ $(document).ready(function () {
         });
         
     });
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:54049/api/Models/GetWords',
+            //     datatype: 'jsonp',
+            beforeSend: function (xhr) {
+                //     preloader.css('display', 'block');
+            },
+            success: function (data) {
+                //   console.log(data[Math.round(0 - 0.5 + Math.random() * (data.length))]);
 
+                var r = Math.round(0 - 0.5 + Math.random() * (data.length));
+                document.getElementById("newWord").innerHTML = data[r].word1;
+                document.getElementById("transcription").innerHTML = data[r].transcription;
+                document.getElementById("translate").innerHTML = data[r].translate;
+
+                //    $('#lbl').text = (data[Math.round(0 - 0.5 + Math.random() * (data.length))].word1);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText || textStatus);
+            }
+        });
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:54049/api/Models/GetThemes',
+            //     datatype: 'jsonp',
+            beforeSend: function (xhr) {
+                // preloader.css('display', 'block');
+            },
+            success: function (data) {
+                // console.log(data);
+                //  var cityData = result.Data;
+                var defaultV = new Option("--Select--", 0, true);
+                $('#selectTheme').empty();
+                $('#selectTheme').append(defaultV);
+                for (var i = 0; i < data.length; i++) {
+                    var opt = new Option(data[i].name, data[i].id_theme, false);
+                    $('#selectTheme').append(opt);
+                }
+                sessionStorage.setItem(tokenKey, data.access_token);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText || textStatus);
+            }
+        });
+
+//}
     $('#but-Sign-Up').click(function (e) {
         e.preventDefault();
         $('#wrapped').css('display', 'block');
@@ -139,14 +184,58 @@ $(document).ready(function () {
         e.preventDefault();
         $.ajax({
             type: 'GET',
-            url: 'http://localhost:54049/api/Values/GetValues',
+            url: 'http://localhost:54049/api/Models/GetWords',
             //     datatype: 'jsonp',
             beforeSend: function (xhr) {
-                var token = sessionStorage.getItem(tokenKey);
-                xhr.setRequestHeader("Authorization", "Bearer " + token);
+           //     preloader.css('display', 'block');
             },
             success: function (data) {
-                alert(data);
+                //   console.log(data);
+                for (var i = 0; i < data.length; i++) {
+                  alert(data[i].translate);
+                }
+                 
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText || textStatus);
+            }
+        });
+    });
+   //   $('#getNewWordTry').click(    function (e) {
+   //        e.preventDefault();
+    
+ //  });
+   //   $('#Themes').click(function (e) {
+    
+    //    e.preventDefault();
+       
+ //   });
+    $('#no').click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            beforeSend: function (xhr) { 
+            },
+            success: function (data) {
+                chrome.browserAction.setBadgeText({ text: "" });
+                window.close();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText || textStatus);
+            }
+        });
+    });
+
+    $('#yes').click(function (e) {
+        e.preventDefault();
+        $.ajax({
+         //   url: 'http://localhost:54049/api/Models/HaveLerntWord',
+            beforeSend: function (xhr) {             
+                    var token = sessionStorage.getItem(tokenKey);
+                    xhr.setRequestHeader("Authorization", "Bearer " + token);              
+            },
+            success: function () {
+               console.log("OK!");
+               
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(jqXHR.responseText || textStatus);
