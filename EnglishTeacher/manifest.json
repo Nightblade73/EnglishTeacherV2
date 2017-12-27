@@ -4,7 +4,11 @@
   "name": "EnglishTeacher",
   "description": "This extension allows you learning new words",
   "version": "1.0",
-
+  "icons": {
+    "16": "bookmark.png",
+    "48": "bookmark.png",
+    "128": "bookmark.png"
+  },
   "background": {
     "persistent": false,
     "page": "Views/Home/background.html"
