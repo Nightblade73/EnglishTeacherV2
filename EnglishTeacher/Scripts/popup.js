@@ -17,67 +17,54 @@
 //        });
 //    }, false);
 //}, false);
-var preloader = $('#wrapped');
-var tokenKey = "tokenInfo";
-var user = getCookie("username");
-var password = getCookie("password");
-if (user || password) {
-    var email = getCookie("username");
-    var password = getCookie("password");
-    login(email, password, preloader, function (data) {
-        sessionStorage.setItem(tokenKey, data.access_token);
-        document.location.href = "main.html";
-    });
+//
+//var user = getCookie("username");
+//var password = getCookie("password");
+//if (user || password) {
+//    var email = getCookie("username");
+//    var password = getCookie("password");
+//    login(email, password, preloader, function (data) {
+//        sessionStorage.setItem(tokenKey, data.access_token);
+//        document.location.href = "main.html";
+//    });
 
-} else {
-    $(document).ready(function () {
-        $('#but-Sign-In').click(function (e) {
-            e.preventDefault();
-            var email = $('#emailLogin').val();
-            var password = $('#passwordLogin').val();
-            login(email, password, preloader, function (data) {
-                sessionStorage.setItem(tokenKey, data.access_token);
-                setCookie("username", email);
-                setCookie("password", password);
-                document.location.href = "main.html";
-            });
+//} else {
+$(document).ready(function () {
+    var ex = new extenApi();
+    var tokenKey = "tokenInfo";
+    $('#but-Sign-In').click(function (e) {
+        e.preventDefault();
+        var email = $('#emailLogin').val();
+        var password = $('#passwordLogin').val();
+        $('#wrapped').css('display', 'block');
+        ex.login(email, password, function (data) {
+            sessionStorage.setItem(tokenKey, data.access_token);
+            setCookie("username", email);
+            setCookie("password", password);
+            $('#wrapped').css('display', 'none');
+            document.location.href = "main.html";
+        }, function (jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText || textStatus);
         });
+        
     });
-}
 
-$(function () {
-    
     $('#but-Sign-Up').click(function (e) {
         e.preventDefault();
-        var data = {
-            Email: $('#inputEmail').val(),
-            Password: $('#inputPassword').val(),
-            ConfirmPassword: $('#inputPasswordConfirmation').val()
-        };
-
-        $.ajax({
-            type: 'POST',
-            url: 'http://localhost:54049/api/Account/Register/',
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(data),
-            beforeSend: function () {
-                preloader.css('display', 'block');
-            },
-            complete: function () {
-                preloader.css('display', 'none');
-            },
-            success: function (data) {
+        $('#wrapped').css('display', 'block');
+        ex.registration($('#inputEmail').val(), $('#inputPassword').val(),
+            $('#inputPasswordConfirmation').val(),
+            function (data) {
                 alert("Всё норм");
+                $('#wrapped').css('display', 'none'); 
             },
-            fail: function (data) {
-                alert(data.responseText);
-            },
-            error: function (data) {
+            function (data) {
                 alert(data.responseText);
             }
-        });
+        );
+          
     });
-    
+
     //var loginData = {
     //    grant_type: 'password',
     //    username: $('#emailLogin').val(),
@@ -171,8 +158,6 @@ $(function () {
         e.preventDefault();
         sessionStorage.removeItem(tokenKey);
     });
-
-
 });
 //document.addEventListener('DOMContentLoaded', function () {
 //    document.querySelector('#submitLogin').addEventListener('click', clickHandler);

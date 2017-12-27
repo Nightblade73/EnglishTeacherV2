@@ -1,26 +1,39 @@
-﻿function login(email, password, preloader, e1) {
-    var loginData = {
-        grant_type: 'password',
-        username: email,
-        password: password
-    };
-    var ajaxData = {
-        type: 'POST',
-        url: 'http://localhost:54049/Token',
-        data: loginData,
-        beforeSend: function () {
-            preloader.css('display', 'block');
-        },
-        complete: function () {
-            preloader.css('display', 'none');
-        },
-        success: e1,
-        fail: function (data) {
-            alert(data.responseText);
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.responseText || textStatus);
-        }
-    };
-    $.ajax(ajaxData);
+﻿function extenApi() {
+    this.login = function login(email, password, eventSuccess, eventError) {
+        var loginData = {
+            grant_type: 'password',
+            username: email,
+            password: password
+        };
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:54049/Token',
+            data: loginData,
+            success: eventSuccess,
+            fail: function (data) {
+                alert(data.responseText);
+            },
+            error: eventError
+        });
+    }
+
+    this.registration = function registration(email, password, confirmPassword, eventSuccess, eventError) {
+        var data = {
+            Email: email,
+            Password: password,
+            ConfirmPassword: confirmPassword
+        };
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:54049/api/Account/Register/',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data),
+            success: eventSuccess,
+            fail: function (data) {
+                alert(data.responseText);
+            },
+            error: eventError
+        });
+    }
+
 }
