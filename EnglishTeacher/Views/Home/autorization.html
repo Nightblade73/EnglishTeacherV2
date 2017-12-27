@@ -5,19 +5,26 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <script src="../../Scripts/jquery-3.2.1.js"></script>
-    <script src="../../Scripts/cookie.js"></script>
     <script src="../../Scripts/dialog.js"></script>
+    <script src="../../Scripts/cookie.js"></script>
+    <script src="../../Scripts/login.js"></script>
     <script src="../../Scripts/popup.js"></script>
-    <script src="../../Scripts/bootstrap.min.js"></script>
-    
-    
+    <script src="../../Scripts/bootstrap.min.js"></script>   
     <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
     <link href="../../Content/extantion.css" rel="stylesheet" />
-    <title>chrome-extension://idmkbfegdginpeohickgddcmannkbdjk</title>
 </head>
 <body>
-    <div id="wrapped">
+    <div class="wrapped" id="preloader">
         <img src="../../Images/preloader.gif">
+    </div>
+<<<<<<< HEAD
+    <div id="wrapped">
+        <img src="../../Images/consulting.ico">
+=======
+    <div class="wrapped" id="infoBlock">    
+        <p id="message"></p>
+>>>>>>> e9879562c1a8ec453f44adaef41cad8dd2928b96
+        <button type="submit" class="btn btn-default" id="ok">OK</button>
     </div>
     <div class="container container-no-padding">
         <div class="row" id="main-section">
@@ -40,13 +47,13 @@
                                     <label for="passwordLogin">Пароль</label>
                                     <input type="password" class="form-control" id="passwordLogin">
                                 </div>
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <div class="main-checkbox">
                                         <input value="None" id="checkbox1" name="check" type="checkbox">
                                         <label for="checkbox1"></label>
                                     </div>
                                     <span class="text">Запомнить меня</span>
-                                </div>
+                                </div>-->
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-default" id="but-Sign-In">Войти</button>
                                 </div>
@@ -57,14 +64,6 @@
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="Sign-Up">
                             <form class="form-horizontal">
-                                <!--<div class="form-group">
-                                    <label for="exampleInputEmail1">First Name</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Last Name</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1">
-                                </div>-->
                                 <div class="form-group">
                                     <label for="inputEmail">Email</label>
                                     <input type="email" class="form-control" id="inputEmail">

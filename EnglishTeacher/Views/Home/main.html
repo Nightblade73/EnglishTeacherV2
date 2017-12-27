@@ -5,13 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <script src="../../Scripts/jquery-3.2.1.js"></script>
-    <script src="../../Scripts/popup.js"></script>
     <script src="../../Scripts/bootstrap.min.js"></script>
-    <script src="../../Scripts/dialog.js"></script>
     <script src="../../Scripts/cookie.js"></script>
+    <script src="../../Scripts/dialog.js"></script>
+    <script src="../../Scripts/popup.js"></script>
     <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
     <link href="../../Content/extantion.css" rel="stylesheet" />
-    <title>chrome-extension://idmkbfegdginpeohickgddcmannkbdjk</title>
 </head>
 <body class="main">
     <section>
@@ -20,7 +19,13 @@
             <input type="submit" id="getNewWord" value="Получить слово" />
             <!--<div class="textimage">-->
             <!--<img src="../../img/room2.jpg">-->
-            <div class="setLogo"><a href="settings.html"><img src="../../Images/settings.ico"></a><a> </a><a><img src="../../Images/logout.ico"></a></div>
+            <div class="setLogo">
+                <a href="settings.html">
+                    <img src="../../Images/settings.ico">
+                </a>
+                <!--<a> </a>-->
+                <img id="logOut" src="../../Images/logout.ico">
+            </div>
 
             <!--<div class="text_prim">
                 <h3>Слово</h3>
@@ -33,23 +38,23 @@
                 <label id="transcription" runat="server" class="transl_transc"></label>
                 <label id="translate" runat="server" class="transl_transc"></label>
             </div>
-            <div class="form-group" id="Themes">
+            <!--<div class="form-group" id="Themes">
                 <p>
                     <label>Тема дня</label>
                     <select id="selectTheme"></select>
                 </p>
 
-            </div>
+            </div>-->
             <div class="yesno">
                 <!--<a id="yesno">Запомнил   </a> <a>   </a> <a id="yesno">Не запомнил</a>-->
                 <a id="yes">Запомнил   </a> <a>   </a> <a id="no">Не запомнил</a>
             </div>
             <!--</div>-->
         </div>
-    <!--<footer id="info">
-        <button id="toggleAlarm">Activate alarm</button>
-    </footer>-->
-  </section>
+        <!--<footer id="info">
+            <button id="toggleAlarm">Activate alarm</button>
+        </footer>-->
+    </section>
 </body>
 
 </html>
