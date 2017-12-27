@@ -82,7 +82,6 @@ namespace EnglishTeacher.Controllers
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
         {
             IdentityUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-
             if (user == null)
             {
                 return null;

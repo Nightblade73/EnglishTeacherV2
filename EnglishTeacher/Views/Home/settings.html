@@ -33,8 +33,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <script src="../../Scripts/jquery-1.10.2.js"></script>
+    <script src="../../Scripts/jquery-3.2.1.js"></script>
     <script src="../../Scripts/popup.js"></script>
     <script src="../../Scripts/bootstrap.min.js"></script>
+    <script src="../../Scripts/dialog.js"></script>
+    <script src="../../Scripts/cookie.js"></script>
     <script type='text/javascript' src="../../Scripts/select_demo2.js"></script>
     <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
     <link href="../../Content/extantion.css" rel="stylesheet" />
@@ -70,10 +73,8 @@
                                 <div class="form-group">
                                     <p>
                                         <label>Тема дня</label>
-                                        <select>
-                                            <option>Тема 1</option>
-                                            <option>Тема 2</option>
-                                            <option>Тема 3</option>
+                                        <select id="selectTheme">
+                                            
                                         </select>
                                     </p>
 
@@ -100,7 +101,7 @@
                                 </div>-->
 
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-default" href="main.html">Сохранить</button>
+                                    <button type="submit" id ="btn-Save" runat="server" class="btn btn-default" href="main.html">Сохранить</button>
                                     <button type="submit" class="btn btn-default" href="main.html">Назад</button>
                                 </div>
                                 <!--<div class="form-group">
