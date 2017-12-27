@@ -274,6 +274,7 @@
     <Compile Include="Models\Lernt_words.cs" />
     <Compile Include="Models\DataModel.cs" />
     <Compile Include="Models\Theme.cs" />
+    <Compile Include="Models\ThemeBindingModel.cs" />
     <Compile Include="Models\Word.cs" />
     <Compile Include="Models\WordModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

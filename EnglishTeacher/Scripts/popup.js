@@ -62,29 +62,28 @@ $(document).ready(function () {
     //        alert(jqXHR.responseText || textStatus);
     //    }
     //});
-    //$.ajax({
-    //    type: 'GET',
-    //    url: 'http://localhost:54049/api/Models/GetThemes',
-    //    //     datatype: 'jsonp',
-    //    beforeSend: function (xhr) {
-    //        // preloader.css('display', 'block');
-    //    },
-    //    success: function (data) {
-    //        // console.log(data);
-    //        //  var cityData = result.Data;
-    //        let defaultV = new Option("--Select--", 0, true);
-    //        $('#selectTheme').empty();
-    //        $('#selectTheme').append(defaultV);
-    //        for (let i = 0; i < data.length; i++) {
-    //            let opt = new Option(data[i].name, data[i].id_theme, false);
-    //            $('#selectTheme').append(opt);
-    //        }
-    //        sessionStorage.setItem(tokenKey, data.access_token);
-    //    },
-    //    error: function (jqXHR, textStatus, errorThrown) {
-    //        alert(jqXHR.responseText || textStatus);
-    //    }
-    //});
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:54049/api/Models/GetThemes',
+        //     datatype: 'jsonp',
+        beforeSend: function (xhr) {
+            // preloader.css('display', 'block');
+        },
+        success: function (data) {
+            // console.log(data);
+            //  var cityData = result.Data;
+            let defaultV = new Option("--Select--", 0, true);
+            $('#selectTheme').empty();
+            $('#selectTheme').append(defaultV);
+            for (let i = 0; i < data.length; i++) {
+                let opt = new Option(data[i].name, data[i].id_theme, false);
+                $('#selectTheme').append(opt);
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText || textStatus);
+        }
+    });
 
     $('#but-Sign-Up').click(function (e) {
         e.preventDefault();
@@ -158,6 +157,30 @@ $(document).ready(function () {
     //    e.preventDefault();
 
     //   });
+    $('#btn-Save').click(function (e) {
+        e.preventDefault();
+        var data = {
+            Id_theme: $('#selectTheme').val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:54049/api/Models/SaveTheme/',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data),
+            beforeSend: function (xhr) {
+                var token = sessionStorage.getItem(tokenKey);
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
+            success: function (data) {
+                console.log(data);
+
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText || textStatus);
+            }
+        });
+    });
     $('#no').click(function (e) {
         e.preventDefault();
         $.ajax({
@@ -200,6 +223,7 @@ $(document).ready(function () {
         deleteCookie("password");
         document.location.href = "autorization.html";
     });
+
 });
 
 //document.addEventListener('DOMContentLoaded', function () {
