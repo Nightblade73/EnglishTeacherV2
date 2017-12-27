@@ -19,16 +19,17 @@ if (email || password) {
             e.preventDefault();
             let email = $('#emailLogin').val();
             let password = $('#passwordLogin').val();
-            $('#wrapped').css('display', 'block');
+            $('#preloader').css('display', 'block');
             ex.login(email, password, function (data) {
                 sessionStorage.setItem(tokenKey, data.access_token);
                 setCookie("username", email);
                 setCookie("password", password);
-                $('#wrapped').css('display', 'none');
+                $('#preloader').css('display', 'none');
                 document.location.href = "main.html";
             }, function (jqXHR, textStatus, errorThrown) {
-                $('#wrapped').css('display', 'none');
-                alert(jqXHR.responseText || textStatus);
+                $('#preloader').fadeOut('1000');;
+                $('#infoBlock').fadeIn('1000');
+                $('#message').text(jqXHR.responseJSON["error_description"]);
             });
         });
     });

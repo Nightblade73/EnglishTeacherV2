@@ -8,23 +8,37 @@ body {
     transition-duration: 2s;
 }
 
-#wrapped {
+.wrapped {
     position: absolute;
     width: 100%;
     height: 100%;
     display: none;
-    background-color: black;
-    opacity: 0.4;
+    background: rgba(0, 0, 0, 0.4);
     z-index: 1000;
 }
 
-    #wrapped img {
+    .wrapped img {
         position: absolute;
         top: 39%;
         left: 150px;
         width: 100px;
         height: auto;
     }
+
+    .wrapped p {
+        padding: 0 20px;
+        color: white;
+        /* text-transform: capitalize; */
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+
+#ok {
+    width: 100px;
+    left: 150px;
+    position: relative;
+    top: 90px;
+}
 
 .form-group .my-but {
     margin: 5px 0 0 0;

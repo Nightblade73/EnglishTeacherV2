@@ -50,14 +50,14 @@
 
     $('#but-Sign-Up').click(function (e) {
         e.preventDefault();
-        $('#wrapped').css('display', 'block');
+        $('#preloader').css('display', 'block');
         ex.registration($('#inputEmail').val(), $('#inputPassword').val(),
             $('#inputPasswordConfirmation').val(),
             function (data) {
                 alert("Всё норм");
-                $('#wrapped').css('display', 'none');
+                $('#preloader').css('display', 'none');
             }, function (jqXHR, textStatus, errorThrown) {
-                $('#wrapped').css('display', 'none');
+                $('#preloader').css('display', 'none');
                 alert(jqXHR.responseText || textStatus);
             });
 
@@ -65,13 +65,13 @@
 
     $('#send-new-pass').click(function (e) {
         e.preventDefault();
-        $('#wrapped').css('display', 'block');
+        $('#preloader').css('display', 'block');
         ex.forrgotPassword($('#emailToSend').val(),
             function (data) {
                 alert("Вам отправлено письмо с новым паролем");
-                $('#wrapped').css('display', 'none');
+                $('#preloader').css('display', 'none');
             }, function (jqXHR, textStatus, errorThrown) {
-                $('#wrapped').css('display', 'none');
+                $('#preloader').css('display', 'none');
                 alert(jqXHR.responseText || textStatus);
             });
     });
@@ -114,10 +114,10 @@
     //});
 
     $('#ok').click(function () {
-        $('#wrapped').fadeOut('1000');
-        setTimeout(function () {
-            $('#main-section').fadeIn('1000');
-        }, 500);
+        $('#infoBlock').fadeOut('1000');
+        //setTimeout(function () {
+        //    $('#main-section').fadeIn('1000');
+        //}, 500);
     });
 
     //   $('#getNewWordTry').click(    function (e) {
