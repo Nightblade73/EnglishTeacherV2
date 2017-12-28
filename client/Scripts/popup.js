@@ -132,13 +132,15 @@
 
     $('#no').click(function (e) {
         e.preventDefault();
-        $.ajax({
-            success: function (data) {
+		ex.donotremember(
+        function () {
                 chrome.browserAction.setBadgeText({ text: "" });
                 window.close();
             },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(jqXHR.responseText || textStatus);
+        function (jqXHR, textStatus, errorThrown) {
+                /* alert(jqXHR.responseText || textStatus); */
+				$('#infoBlock').fadeIn('1000');
+                $('#message').text(jqXHR.responseText || textStatus);
             }
         });
     });
@@ -150,12 +152,16 @@
                 chrome.browserAction.setBadgeText({ text: "" });
                 window.close();
         },
-			function (jqXHR, textStatus, errorThrown) {
-                alert(jqXHR.responseText || textStatus);
+		function (jqXHR, textStatus, errorThrown) {
+                /* alert(jqXHR.responseText || textStatus); */
+				$('#infoBlock').fadeIn('1000');
+                $('#message').text(qXHR.responseText || textStatus);
             }
 		);
     });
 
+	
+	
     $('#logOut').click(function (e) {
         e.preventDefault();
         sessionStorage.removeItem(tokenKey);

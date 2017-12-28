@@ -89,5 +89,13 @@
             error: eventError
         });
     }
-	
+		this.donotremember = function donotremember(eventSuccess, eventError) {
+/*         let data = {
+            Word: word,
+        }; */
+		$.ajax({
+            success: eventSuccess,
+            error: eventError
+        });
+    }
 }
