@@ -145,26 +145,15 @@
 
     $('#yes').click(function (e) {
         e.preventDefault();
-        var data = {
-            Word: document.getElementById("newWord").textContent
-        };
-        $.ajax({
-            url: 'http://localhost:54049/api/Models/SaveWord/',
-            type: 'POST',
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(data),
-            beforeSend: function (xhr) {
-                let token = sessionStorage.getItem(tokenKey);
-                xhr.setRequestHeader("Authorization", "Bearer " + token);
-            },
-            success: function () {
+		ex.remember(document.getElementById("newWord").textContent, sessionStorage.getItem(tokenKey),
+		function () {
                 chrome.browserAction.setBadgeText({ text: "" });
                 window.close();
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
+        },
+			function (jqXHR, textStatus, errorThrown) {
                 alert(jqXHR.responseText || textStatus);
             }
-        });
+		);
     });
 
     $('#logOut').click(function (e) {
