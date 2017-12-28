@@ -5,20 +5,28 @@ namespace EnglishTeacher.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Runtime.Serialization;
 
+    [DataContract]
+    [KnownType(typeof(Theme))]
+    [KnownType(typeof(Word))]
+    [KnownType(typeof(AspNetUser))]
     public partial class Lernt_words
     {
         [Key]
-        public string id_lernt_word { get; set; }
+        [DataMember]
+        public int id_lernt_word { get; set; }
 
         [Required]
         [StringLength(128)]
+        [DataMember]
         public string id_user { get; set; }
-
+        [DataMember]
         public int id_theme { get; set; }
 
         [Required]
         [StringLength(128)]
+        [DataMember]
         public string id_word { get; set; }
 
         public virtual AspNetUser AspNetUser { get; set; }

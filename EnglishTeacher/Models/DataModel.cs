@@ -8,7 +8,7 @@ namespace EnglishTeacher.Models
     public partial class DataModel : DbContext
     {
         public DataModel()
-            : base("name=DataModel")
+            : base("name=lab_group3")
         {
         }
 
