@@ -364,12 +364,7 @@ namespace EnglishTeacher.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                // If user has to activate his email to confirm his account, the use code listing below
-                //if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
-                //{
-                //    return Ok();
-                //}      
+                var user = await UserManager.FindByNameAsync(model.Email);     
                 if (user == null)
                 {
                     return BadRequest(ModelState);
@@ -377,13 +372,11 @@ namespace EnglishTeacher.Controllers
                 var modelPassword = new SetPasswordBindingModel();
                 modelPassword.NewPassword = PasswordGeneratorService.GeneratePassword(6);
                 modelPassword.ConfirmPassword = modelPassword.NewPassword;
-                modelPassword.Code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                modelPassword.Code = UserManager.GeneratePasswordResetToken(user.Id);
                 var result = SetPassword(user, modelPassword);
                 await UserManager.SendEmailAsync(user.Id, "Сброс пароля", $"Ваш новый пароль::" + modelPassword.NewPassword );
                 return Ok();
             }
-
-            // If we got this far, something failed, redisplay form
             return BadRequest(ModelState);
         }
 
