@@ -72,6 +72,7 @@ function (data) {
 $('#preloader').css('display', 'none');
 $('#infoBlock').fadeIn('1000');
 $('#message').text("Вам отправлено письмо с новым паролем");
+window.close();
 }, function (error) {
 $('#preloader').fadeOut('1000');;
 $('#infoBlock').fadeIn('1000');

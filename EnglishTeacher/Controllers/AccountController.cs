@@ -372,7 +372,7 @@ namespace EnglishTeacher.Controllers
                 //}      
                 if (user == null)
                 {
-                    return Ok();
+                    return BadRequest(ModelState);
                 }              
                 var modelPassword = new SetPasswordBindingModel();
                 modelPassword.NewPassword = PasswordGeneratorService.GeneratePassword(6);
