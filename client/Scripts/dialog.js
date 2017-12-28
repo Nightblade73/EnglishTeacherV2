@@ -72,4 +72,22 @@
             error: eventError
         });
     }
+	
+	this.remember = function remember(word, token, eventSuccess, eventError) {
+        let data = {
+            Word: word,
+        };
+		$.ajax({
+            url: 'http://localhost:54049/api/Models/SaveWord/',
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
+            success: eventSuccess,
+            error: eventError
+        });
+    }
+	
 }

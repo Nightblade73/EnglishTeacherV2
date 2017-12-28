@@ -70,9 +70,10 @@
             function (data) {
                 alert("Вам отправлено письмо с новым паролем");
                 $('#preloader').css('display', 'none');
-            }, function (jqXHR, textStatus, errorThrown) {
-                $('#preloader').css('display', 'none');
-                alert(jqXHR.responseText || textStatus);
+            }, function (error) {
+                $('#preloader').fadeOut('1000');;
+                $('#infoBlock').fadeIn('1000');
+                $('#message').text(errorMessage(error));
             });
     });
 
@@ -116,35 +117,22 @@
 
     $('#ok').click(function () {
         $('#infoBlock').fadeOut('1000');
-        //setTimeout(function () {
-        //    $('#main-section').fadeIn('1000');
-        //}, 500);
     });
 
-    //   $('#getNewWordTry').click(    function (e) {
-    //        e.preventDefault();
-
-    //  });
-    //   $('#Themes').click(function (e) {
-
-    //    e.preventDefault();
-
-    //   });
     $('#btn-Save').click(function (e) {
         e.preventDefault();
         ex.saveSettings($('#selectTheme').val(), sessionStorage.getItem(tokenKey),
             function () {
                 document.location.href = "main.html";
             }, function (jqXHR, textStatus, errorThrown) {
-                alert(jqXHR.responseText || textStatus);
+				$('#infoBlock').fadeIn('1000');
+                $('#message').text(jqXHR.responseText || textStatus);
             });
     });
 
     $('#no').click(function (e) {
         e.preventDefault();
         $.ajax({
-            beforeSend: function (xhr) {
-            },
             success: function (data) {
                 chrome.browserAction.setBadgeText({ text: "" });
                 window.close();
@@ -159,7 +147,6 @@
         e.preventDefault();
         var data = {
             Word: document.getElementById("newWord").textContent
-            // Word: $('#newWord').val()
         };
         $.ajax({
             url: 'http://localhost:54049/api/Models/SaveWord/',

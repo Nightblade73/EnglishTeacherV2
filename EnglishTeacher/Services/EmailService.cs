@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
-using System.Net.Mime;
-using System.IO;
-using System.Reflection;
-using System.Xml;
 using Microsoft.AspNet.Identity;
 using System.Threading.Tasks;
-using SendGrid;
-using SendGrid.Helpers.Mail;
 using System.Configuration;
 
 namespace EnglishTeacher.Services
