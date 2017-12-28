@@ -19,6 +19,7 @@ using EnglishTeacher.Results;
 using System.Web.Http.Routing;
 using System.Web.Http.Cors;
 using EnglishTeacher.Services;
+using System.Threading;
 
 namespace EnglishTeacher.Controllers
 {
@@ -372,37 +373,14 @@ namespace EnglishTeacher.Controllers
                 var modelPassword = new SetPasswordBindingModel();
                 modelPassword.NewPassword = PasswordGeneratorService.GeneratePassword(6);
                 modelPassword.ConfirmPassword = modelPassword.NewPassword;
-                modelPassword.Code = UserManager.GeneratePasswordResetToken(user.Id);
+                modelPassword.Code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var result = SetPassword(user, modelPassword);
+                Thread.Sleep(1000);
                 await UserManager.SendEmailAsync(user.Id, "Сброс пароля", $"Ваш новый пароль::" + modelPassword.NewPassword );
                 return Ok();
             }
             return BadRequest(ModelState);
         }
-
-        // POST api/Account/ResetPassword
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[Route("ResetPassword")]
-        //public async Task<IHttpActionResult> ResetPassword(ResetPasswordBindingModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    var user = await UserManager.FindByNameAsync(model.Email);
-        //    if (user == null)
-        //    {
-        //        // Don't reveal that the user does not exist
-        //        return Ok();
-        //    }
-        //    var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
-        //    if (result.Succeeded)
-        //    {
-        //        return Ok();
-        //    }
-        //    return Ok();
-        //}
 
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]

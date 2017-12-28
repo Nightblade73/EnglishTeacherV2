@@ -27,30 +27,6 @@ namespace EnglishTeacher.Services
                     Smtp.Send(Message);
                 }
             }
-
-
-            //using (SmtpClient Smtp = new SmtpClient("smtp.yandex.ru", 25))
-            //{
-            //    Smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-            //    Smtp.UseDefaultCredentials = false;
-            //    Smtp.Credentials = new NetworkCredential(from, password);
-            //    Smtp.EnableSsl = true;
-            //    using (var Message = new MailMessage(from, message.Destination))
-            //    {
-            //        Message.Subject = message.Subject;
-            //        Message.Body = message.Body;
-            //        Message.IsBodyHtml = true;
-            //        try
-            //        {
-            //            await Smtp.SendMailAsync(Message);
-            //        }
-            //        catch (SmtpException ex)
-            //        {
-            //            Console.WriteLine(ex.Message);
-            //        }
-            //    }
-            //}
-
         }
 
         #endregion

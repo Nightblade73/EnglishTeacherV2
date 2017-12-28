@@ -35,6 +35,7 @@ namespace EnglishTeacher.Models
     public class RegisterBindingModel
     {
         [Required]
+        [DataType(DataType.EmailAddress)]
         [Display(Name = "Адрес электронной почты")]
         public string Email { get; set; }
 
@@ -86,14 +87,9 @@ namespace EnglishTeacher.Models
 
     public class ForgotPasswordBindingModel
     {
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Адрес электронной почты")]
         public string Email { get; set; }
     }
-
-    //public class ResetPasswordBindingModel
-    //{
-    //    public string Code { get; set; }
-    //    public string ConfirmPassword { get; set; }
-    //    public string Email { get; set; }
-    //    public string Password { get; set; }
-    //}
 }
