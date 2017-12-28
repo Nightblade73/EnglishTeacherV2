@@ -2,39 +2,9 @@
     var ex = new extenApi();
     var tokenKey = "tokenInfo";
 
-    $.ajax({
-        type: 'GET',
-        url: 'http://localhost:54049/api/Models/GetWords',
-        //     datatype: 'jsonp',
-        beforeSend: function (xhr) {
-            //     preloader.css('display', 'block');
-        },
-        success: function (data) {
-            //   console.log(data[Math.round(0 - 0.5 + Math.random() * (data.length))]);
 
-            //     let r = Math.round(0 - 0.5 + Math.random() * (data.length));
-            //     document.getElementById("newWord").innerHTML = data[r].word1;
-            //     document.getElementById("transcription").innerHTML = data[r].transcription;
-            //     document.getElementById("translate").innerHTML = data[r].translate;
-
-            //    $('#lbl').text = (data[Math.round(0 - 0.5 + Math.random() * (data.length))].word1);
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-
-            alert(jqXHR.responseText || textStatus);
-        }
-    });
-
-    $.ajax({
-        type: 'GET',
-        url: 'http://localhost:54049/api/Models/GetThemes',
-        //     datatype: 'jsonp',
-        beforeSend: function (xhr) {
-            // preloader.css('display', 'block');
-        },
-        success: function (data) {
-            // console.log(data);
-            //  var cityData = result.Data;
+   ex.getThemes(sessionStorage.getItem(tokenKey),
+        function (data) {
             let defaultV = new Option("--Select--", 0, true);
             $('#selectTheme').empty();
             $('#selectTheme').append(defaultV);
@@ -43,10 +13,10 @@
                 $('#selectTheme').append(opt);
             }
         },
-        error: function (jqXHR, textStatus, errorThrown) {
+		function (jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText || textStatus);
-        }
-    });
+        });
+ 
 
     $('#but-Sign-Up').click(function (e) {
         e.preventDefault();
@@ -94,25 +64,15 @@
 
     $('#getItemsButton').click(function (e) {
         e.preventDefault();
-        $.ajax({
-            type: 'GET',
-            url: 'http://localhost:54049/api/Models/GetWordWithUser',
-            //     datatype: 'jsonp',
-            beforeSend: function (xhr) {
-                //     preloader.css('display', 'block');
-                let token = sessionStorage.getItem(tokenKey);
-                xhr.setRequestHeader("Authorization", "Bearer " + token);
-            },
-            success: function (data) {
-                //   console.log(data);
+        ex.getNewWord( sessionStorage.getItem(tokenKey),
+        function (data) {
                 document.getElementById("newWord").innerHTML = data.word1;
                 document.getElementById("translate").innerHTML = data.translate;
-
             },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(jqXHR.responseText || textStatus);
-            }
-        });
+		function (jqXHR, textStatus, errorThrown) {
+				$('#infoBlock').fadeIn('1000');
+                $('#message').text(jqXHR.responseText || textStatus);
+            });
     });
 
     $('#ok').click(function () {
@@ -132,18 +92,18 @@
 
     $('#no').click(function (e) {
         e.preventDefault();
-		ex.donotremember(
-        function () {
+        ex.donotremember(
+            function () {
                 chrome.browserAction.setBadgeText({ text: "" });
                 window.close();
             },
-        function (jqXHR, textStatus, errorThrown) {
+            function (jqXHR, textStatus, errorThrown) {
                 /* alert(jqXHR.responseText || textStatus); */
-				$('#infoBlock').fadeIn('1000');
+                $('#infoBlock').fadeIn('1000');
                 $('#message').text(jqXHR.responseText || textStatus);
             });
         });
-   
+ 
 
     $('#yes').click(function (e) {
         e.preventDefault();
@@ -156,8 +116,9 @@
                 /* alert(jqXHR.responseText || textStatus); */
 				$('#infoBlock').fadeIn('1000');
                 $('#message').text(qXHR.responseText || textStatus);
-            });
-	});
+            }
+		);
+    });
 
 	
 	

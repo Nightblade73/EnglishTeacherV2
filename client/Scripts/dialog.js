@@ -73,6 +73,30 @@
         });
     }
 	
+	this.getNewWord = function getNewWord(token, eventSuccess, eventError) {
+		$.ajax({
+             type: 'GET',
+            url: 'http://localhost:54049/api/Models/GetWordWithUser',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
+            success: eventSuccess,
+            error: eventError
+        });
+    }
+	
+	this.getThemes = function getNewThemes(token, eventSuccess, eventError) {
+		$.ajax({
+            type: 'GET',
+            url: 'http://localhost:54049/api/Models/GetThemes',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
+            success: eventSuccess,
+            error: eventError
+        });
+    }
+	
 	this.remember = function remember(word, token, eventSuccess, eventError) {
         let data = {
             Word: word,
