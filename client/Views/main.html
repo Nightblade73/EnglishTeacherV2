@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <script src="../Scripts/jquery-3.2.1.min.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
+    <script src="../Scripts/cookie.js"></script>
+    <script src="../Scripts/dialog.js"></script>
+    <script src="../Scripts/popup.js"></script>
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Content/extantion.css" rel="stylesheet" />
+</head>
+<body class="main">
+    <section>
+        <div>
+            <input type="submit" id="getItemsButton" value="Получить данные" />
+            <input type="submit" id="getNewWord" value="Получить слово" />
+            <div class="setLogo">
+                <a href="settings.html">
+                    <img src="../Images/settings.ico">
+                </a>
+                <img id="logOut" src="../Images/logout.ico">
+            </div>
+
+            <div class="text_prim" id="getNewWordTry">
+                <label id="newWord" runat="server" class="word"></label>
+                <br>
+                <label id="transcription" runat="server" class="transl_transc"></label>
+                <label id="translate" runat="server" class="transl_transc"></label>
+            </div>
+            <div class="yesno">
+                <a id="yes">Запомнил   </a> <a>   </a> <a id="no">Не запомнил</a>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

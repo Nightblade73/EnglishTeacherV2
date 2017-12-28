@@ -263,7 +263,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Controllers\ThemesController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -286,18 +285,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
-    <Content Include="background.js" />
-    <Content Include="bookmark.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\extantion.css" />
-    <Content Include="Content\style.css" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="icon.png" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
@@ -320,14 +313,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\185095 %284%29.ico" />
-    <Content Include="Images\consulting.ico" />
-    <Content Include="Images\logout.ico" />
-    <Content Include="Images\set.ico" />
-    <Content Include="Images\preloader.gif" />
-    <Content Include="Images\preloader1.gif" />
-    <Content Include="Images\settings.ico" />
-    <Content Include="manifest.json" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -336,11 +321,11 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\cookie.js" />
     <Content Include="Scripts\dialog.js" />
+    <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
     <Content Include="Scripts\jquery-3.2.1.slim.js" />
@@ -359,10 +344,6 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\select.js" />
     <Content Include="Scripts\select_demo2.js" />
-    <Content Include="Views\Home\autorization.html" />
-    <Content Include="Views\Home\background.html" />
-    <Content Include="Views\Home\main.html" />
-    <Content Include="Views\Home\settings.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -383,12 +364,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Themes\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
