@@ -12,7 +12,7 @@ function showNotification() {
 
     chrome.notifications.create('reminder', {
         type: 'basic',
-        iconUrl: '../../bookmark.png',
+        iconUrl: '../../Images/bookmark.png',
         title: 'Привет!',
         message: 'Есть новое слово для тебя! Загляни в расширение'
     }, function (notificationId) { });
