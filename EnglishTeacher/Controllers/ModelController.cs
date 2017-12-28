@@ -43,7 +43,7 @@ namespace EnglishTeacher.Controllers
             int id_theme = Convert.ToInt32(entities.AspNetUsers.SingleOrDefault(u => u.Id.Equals(id)).id_theme_day);
             if (id_theme == 0)
             {
-                var needWords = from w in entities.Words// определяем каждый объект из teams как t
+                var needWords = from w in GetWords()// определяем каждый объект из teams как t
                                 select w.id_word;
                 var lerntWords = from w in entities.Lernt_words// определяем каждый объект из teams как t
                             where w.id_user.Equals(id) //фильтрация по критерию
@@ -51,7 +51,11 @@ namespace EnglishTeacher.Controllers
 
                 foreach (var n in needWords)
                 {
-                    if (!lerntWords.Contains(n))
+                    if (!(lerntWords.Count() == 0)) {
+                        if (!lerntWords.Contains(n)){
+                            return GetWordById(n);
+                        }
+                    } else
                     {
                         return GetWordById(n);
                     }
@@ -65,11 +69,10 @@ namespace EnglishTeacher.Controllers
             var lerntWords = from w in entities.Lernt_words// определяем каждый объект из teams как t
                                  where w.id_user.Equals(id) && w.id_theme==id_theme //фильтрация по критерию
                                  select w.id_word;
-                needWords.Count();
-                lerntWords.Count();
+                
                 foreach (var n in needWords)
                 {
-                    if (!lerntWords.Contains(n))
+                    if ((lerntWords.Count() == 0) || (!lerntWords.Contains(n)))
                     {
                         return GetWordById(n);
                     }
