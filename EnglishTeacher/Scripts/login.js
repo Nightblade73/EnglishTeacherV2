@@ -26,10 +26,10 @@ if (email || password) {
                 setCookie("password", password);
                 $('#preloader').css('display', 'none');
                 document.location.href = "main.html";
-            }, function (jqXHR, textStatus, errorThrown) {
+            }, function (error) {
                 $('#preloader').fadeOut('1000');;
                 $('#infoBlock').fadeIn('1000');
-                $('#message').text(jqXHR.responseJSON["error_description"]);
+                $('#message').text(error.responseJSON["error_description"]);
             });
         });
     });

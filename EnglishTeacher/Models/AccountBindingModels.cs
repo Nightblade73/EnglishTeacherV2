@@ -21,7 +21,7 @@ namespace EnglishTeacher.Models
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} и не более 100 символов.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Новый пароль")]
         public string NewPassword { get; set; }
@@ -35,11 +35,12 @@ namespace EnglishTeacher.Models
     public class RegisterBindingModel
     {
         [Required]
+        [DataType(DataType.EmailAddress)]
         [Display(Name = "Адрес электронной почты")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} и не более 100 символов.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
@@ -73,7 +74,7 @@ namespace EnglishTeacher.Models
         public string Code { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} и не более 100 символов.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Новый пароль")]
         public string NewPassword { get; set; }
@@ -86,14 +87,9 @@ namespace EnglishTeacher.Models
 
     public class ForgotPasswordBindingModel
     {
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Адрес электронной почты")]
         public string Email { get; set; }
     }
-
-    //public class ResetPasswordBindingModel
-    //{
-    //    public string Code { get; set; }
-    //    public string ConfirmPassword { get; set; }
-    //    public string Email { get; set; }
-    //    public string Password { get; set; }
-    //}
 }

@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     var ex = new extenApi();
     var tokenKey = "tokenInfo";
-    
+
     $.ajax({
         type: 'GET',
         url: 'http://localhost:54049/api/Models/GetWords',
@@ -12,10 +12,10 @@
         success: function (data) {
             //   console.log(data[Math.round(0 - 0.5 + Math.random() * (data.length))]);
 
-       //     let r = Math.round(0 - 0.5 + Math.random() * (data.length));
-       //     document.getElementById("newWord").innerHTML = data[r].word1;
-       //     document.getElementById("transcription").innerHTML = data[r].transcription;
-       //     document.getElementById("translate").innerHTML = data[r].translate;
+            //     let r = Math.round(0 - 0.5 + Math.random() * (data.length));
+            //     document.getElementById("newWord").innerHTML = data[r].word1;
+            //     document.getElementById("transcription").innerHTML = data[r].transcription;
+            //     document.getElementById("translate").innerHTML = data[r].translate;
 
             //    $('#lbl').text = (data[Math.round(0 - 0.5 + Math.random() * (data.length))].word1);
         },
@@ -24,7 +24,7 @@
             alert(jqXHR.responseText || textStatus);
         }
     });
-   
+
     $.ajax({
         type: 'GET',
         url: 'http://localhost:54049/api/Models/GetThemes',
@@ -56,11 +56,11 @@
             function (data) {
                 alert("Всё норм");
                 $('#preloader').css('display', 'none');
-            }, function (jqXHR, textStatus, errorThrown) {
-                $('#preloader').css('display', 'none');
-                alert(jqXHR.responseText || textStatus);
+            }, function (error) {
+                $('#preloader').fadeOut('1000');;
+                $('#infoBlock').fadeIn('1000');
+                $('#message').text(errorMessage(error));
             });
-
     });
 
     $('#send-new-pass').click(function (e) {
@@ -188,4 +188,16 @@
         document.location.href = "autorization.html";
     });
 
+    function errorMessage(error) {
+        let message = "";
+        if (typeof error.responseJSON.ModelState[""] !== "undefined")
+            message += error.responseJSON.ModelState[""][0] + "\n";
+        if (typeof error.responseJSON.ModelState["model.ConfirmPassword"] !== "undefined")
+            message += error.responseJSON.ModelState["model.ConfirmPassword"][0] + "\n";
+        if (typeof error.responseJSON.ModelState["model.Password"] !== "undefined")
+            message += error.responseJSON.ModelState["model.Password"][0] + "\n";
+        if (typeof error.responseJSON["error_description"] !== "undefined")
+            message += error.responseJSON["error_description"] + "\n";
+        return message;
+    }
 });
