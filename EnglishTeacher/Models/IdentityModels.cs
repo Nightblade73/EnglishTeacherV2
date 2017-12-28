@@ -21,7 +21,7 @@ namespace EnglishTeacher.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DataModel", throwIfV1Schema: false)
+            : base("lab_group3", throwIfV1Schema: false)
         {
         }
         
