@@ -2,28 +2,28 @@
     var ex = new extenApi();
     var tokenKey = "tokenInfo";
     
-    //$.ajax({
-    //    type: 'GET',
-    //    url: 'http://localhost:54049/api/Models/GetWords',
-    //    //     datatype: 'jsonp',
-    //    beforeSend: function (xhr) {
-    //        //     preloader.css('display', 'block');
-    //    },
-    //    success: function (data) {
-    //        //   console.log(data[Math.round(0 - 0.5 + Math.random() * (data.length))]);
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:54049/api/Models/GetWords',
+        //     datatype: 'jsonp',
+        beforeSend: function (xhr) {
+            //     preloader.css('display', 'block');
+        },
+        success: function (data) {
+            //   console.log(data[Math.round(0 - 0.5 + Math.random() * (data.length))]);
 
-    //        let r = Math.round(0 - 0.5 + Math.random() * (data.length));
-    //        document.getElementById("newWord").innerHTML = data[r].word1;
-    //        document.getElementById("transcription").innerHTML = data[r].transcription;
-    //        document.getElementById("translate").innerHTML = data[r].translate;
+       //     let r = Math.round(0 - 0.5 + Math.random() * (data.length));
+       //     document.getElementById("newWord").innerHTML = data[r].word1;
+       //     document.getElementById("transcription").innerHTML = data[r].transcription;
+       //     document.getElementById("translate").innerHTML = data[r].translate;
 
-    //        //    $('#lbl').text = (data[Math.round(0 - 0.5 + Math.random() * (data.length))].word1);
-    //    },
-    //    error: function (jqXHR, textStatus, errorThrown) {
+            //    $('#lbl').text = (data[Math.round(0 - 0.5 + Math.random() * (data.length))].word1);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
 
-    //        alert(jqXHR.responseText || textStatus);
-    //    }
-    //});
+            alert(jqXHR.responseText || textStatus);
+        }
+    });
    
     $.ajax({
         type: 'GET',
@@ -91,27 +91,28 @@
     });
 
 
-    //$('#getItemsButton').click(function (e) {
-    //    e.preventDefault();
-    //    $.ajax({
-    //        type: 'GET',
-    //        url: 'http://localhost:54049/api/Models/GetWords',
-    //        //     datatype: 'jsonp',
-    //        beforeSend: function (xhr) {
-    //            //     preloader.css('display', 'block');
-    //        },
-    //        success: function (data) {
-    //            //   console.log(data);
-    //            for (let i = 0; i < data.length; i++) {
-    //                alert(data[i].translate);
-    //            }
+    $('#getItemsButton').click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:54049/api/Models/GetWordWithUser',
+            //     datatype: 'jsonp',
+            beforeSend: function (xhr) {
+                //     preloader.css('display', 'block');
+                let token = sessionStorage.getItem(tokenKey);
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
+            success: function (data) {
+                //   console.log(data);
+                document.getElementById("newWord").innerHTML = data.word1;
+                document.getElementById("translate").innerHTML = data.translate;
 
-    //        },
-    //        error: function (jqXHR, textStatus, errorThrown) {
-    //            alert(jqXHR.responseText || textStatus);
-    //        }
-    //    });
-    //});
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText || textStatus);
+            }
+        });
+    });
 
     $('#ok').click(function () {
         $('#infoBlock').fadeOut('1000');
@@ -156,17 +157,22 @@
 
     $('#yes').click(function (e) {
         e.preventDefault();
+        var data = {
+            Word: document.getElementById("newWord").textContent
+            // Word: $('#newWord').val()
+        };
         $.ajax({
-            //   url: 'http://localhost:54049/api/Models/HaveLerntWord',
-            type: 'GET',
-            url: 'http://localhost:54049/api/Models/GetUserId/',
+            url: 'http://localhost:54049/api/Models/SaveWord/',
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data),
             beforeSend: function (xhr) {
                 let token = sessionStorage.getItem(tokenKey);
                 xhr.setRequestHeader("Authorization", "Bearer " + token);
             },
-            success: function (data) {
-                console.log(data);
-
+            success: function () {
+                chrome.browserAction.setBadgeText({ text: "" });
+                window.close();
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(jqXHR.responseText || textStatus);

@@ -14,5 +14,12 @@ namespace EnglishTeacher.Models
             [Display(Name = "Текущая тема")]
             public int Id_theme { get; set; }           
         }
+
+        public class SaveWordBindingModel
+        {
+            [Required]
+            [Display(Name = "Текущее слово")]
+            public string Word { get; set; }
+        }
     }
 }

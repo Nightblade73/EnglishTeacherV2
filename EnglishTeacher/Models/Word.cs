@@ -36,7 +36,7 @@ namespace EnglishTeacher.Models
         public string translate { get; set; }
        
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-         [DataMember]public virtual ICollection<Lernt_words> Lernt_words { get; set; }
+        public virtual ICollection<Lernt_words> Lernt_words { get; set; }
        
         public virtual Theme Theme { get; set; }
     }
