@@ -141,9 +141,9 @@
                 /* alert(jqXHR.responseText || textStatus); */
 				$('#infoBlock').fadeIn('1000');
                 $('#message').text(jqXHR.responseText || textStatus);
-            }
+            });
         });
-    });
+   
 
     $('#yes').click(function (e) {
         e.preventDefault();
@@ -156,9 +156,8 @@
                 /* alert(jqXHR.responseText || textStatus); */
 				$('#infoBlock').fadeIn('1000');
                 $('#message').text(qXHR.responseText || textStatus);
-            }
-		);
-    });
+            });
+	});
 
 	
 	
