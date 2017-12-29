@@ -5,8 +5,12 @@ var password = getCookie("password");
 if (email || password) {
     let user = getCookie("username");
     let pass = getCookie("password");
+	$(document).ready(function () {
+		$('#preloader').css('display', 'block');
+	});
     ex.login(user, pass, function (data) {
         sessionStorage.setItem(tokenKey, data.access_token);
+		$('#preloader').css('display', 'none');
         document.location.href = "main.html";
     }, function (jqXHR, textStatus, errorThrown) {
         alert(jqXHR.responseText || textStatus);
@@ -22,8 +26,8 @@ if (email || password) {
             $('#preloader').css('display', 'block');
             ex.login(email, password, function (data) {
                 sessionStorage.setItem(tokenKey, data.access_token);
-                setCookie("username", email);
-                setCookie("password", password);
+                setCookie("username", email,1);
+                setCookie("password", password,1);
                 $('#preloader').css('display', 'none');
                 document.location.href = "main.html";
             }, function (error) {
