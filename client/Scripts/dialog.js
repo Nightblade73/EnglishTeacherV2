@@ -7,7 +7,7 @@
         };
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:54049/Token',
+            url: 'https://lab.group.3.b2bfamily.com/Token',
             data: loginData,
             success: eventSuccess,
             fail: function (data) {
@@ -25,7 +25,7 @@
         };
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:54049/api/Account/Register/',
+            url: 'https://lab.group.3.b2bfamily.com/api/Account/Register/',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data),
             success: eventSuccess,
@@ -42,7 +42,7 @@
         };
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:54049/api/Account/ForgotPassword/',
+            url: 'https://lab.group.3.b2bfamily.com/api/Account/ForgotPassword/',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data),
             success: eventSuccess,
@@ -59,7 +59,7 @@
         };
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:54049/api/Models/SaveTheme/',
+            url: 'https://lab.group.3.b2bfamily.com/api/Models/SaveTheme/',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data),
             beforeSend: function (xhr) {
@@ -76,7 +76,7 @@
 	this.getNewWord = function getNewWord(token, eventSuccess, eventError) {
 		$.ajax({
             type: 'GET',
-            url: 'http://localhost:54049/api/Models/GetWordWithUser',
+            url: 'https://lab.group.3.b2bfamily.com/api/Models/GetWordWithUser',
             beforeSend: function (xhr) {
                 xhr.setRequestHeader("Authorization", "Bearer " + token);
             },
@@ -88,7 +88,7 @@
 	this.getThemes = function getNewThemes( eventSuccess, eventError) {
 		$.ajax({
             type: 'GET',
-            url: 'http://localhost:54049/api/Models/GetThemes',
+            url: 'https://lab.group.3.b2bfamily.com/api/Models/GetThemes',
             success: eventSuccess,
             error: eventError
         });
@@ -99,7 +99,7 @@
             Word: word,
         };
 		$.ajax({
-            url: 'http://localhost:54049/api/Models/SaveWord/',
+            url: 'https://lab.group.3.b2bfamily.com/api/Models/SaveWord/',
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data),

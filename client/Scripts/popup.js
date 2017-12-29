@@ -151,12 +151,18 @@ document.location.href = "autorization.html";
 
 function errorMessage(error) {
 let message = "";
+console.log(error.responseJSON);
+if (typeof error.responseJSON.ModelState !== "undefined")
+{
 if (typeof error.responseJSON.ModelState[""] !== "undefined")
-message += error.responseJSON.ModelState[""][0] + "\n";
+message += "Проверьте корректность введённой почты" + "\n";
 if (typeof error.responseJSON.ModelState["model.ConfirmPassword"] !== "undefined")
 message += error.responseJSON.ModelState["model.ConfirmPassword"][0] + "\n";
 if (typeof error.responseJSON.ModelState["model.Password"] !== "undefined")
 message += error.responseJSON.ModelState["model.Password"][0] + "\n";
+}
+if (typeof error.responseJSON["Message"] !== "undefined" && !message.Contaion("Проверьте корректность введённой почты"))
+message += "Проверьте корректность введённой почты" + "\n";
 if (typeof error.responseJSON["error_description"] !== "undefined")
 message += error.responseJSON["error_description"] + "\n";
 return message;
