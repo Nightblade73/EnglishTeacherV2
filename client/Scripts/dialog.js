@@ -73,10 +73,13 @@
         });
     }
 	
-	this.getThemes = function getNewThemes( eventSuccess, eventError) {
+	this.getThemes = function getNewThemes(token, eventSuccess, eventError) {
 		$.ajax({
             type: 'GET',
             url: 'https://lab.group.3.b2bfamily.com/api/Models/GetThemes',
+			beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
             success: eventSuccess,
             error: eventError
         });
