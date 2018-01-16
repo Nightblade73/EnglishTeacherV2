@@ -16,7 +16,7 @@ namespace EnglishTeacher.Controllers
     {
 
         DataModel entities = new DataModel();
-        
+
         [HttpGet]
         [Route("GetWords")]
         public IEnumerable<Word> GetWords()
@@ -39,37 +39,42 @@ namespace EnglishTeacher.Controllers
         public Word GetWordWithUser()
         {
             string id = User.Identity.GetUserId();
-             
+
             int id_theme = Convert.ToInt32(entities.AspNetUsers.SingleOrDefault(u => u.Id.Equals(id)).id_theme_day);
             if (id_theme == 0)
             {
                 var needWords = from w in GetWords()// определяем каждый объект из teams как t
                                 select w.id_word;
                 var lerntWords = from w in entities.Lernt_words// определяем каждый объект из teams как t
-                            where w.id_user.Equals(id) //фильтрация по критерию
-                            select w.id_word;
+                                 where w.id_user.Equals(id) //фильтрация по критерию
+                                 select w.id_word;
 
                 foreach (var n in needWords)
                 {
-                    if (!(lerntWords.Count() == 0)) {
-                        if (!lerntWords.Contains(n)){
+                    if (!(lerntWords.Count() == 0))
+                    {
+                        if (!lerntWords.Contains(n))
+                        {
                             return GetWordById(n);
                         }
-                    } else
+                    }
+                    else
                     {
                         return GetWordById(n);
                     }
                 }
 
 
-            } else { 
-            var needWords = from w in entities.Words // определяем каждый объект из teams как t
-                            where w.id_theme == id_theme //фильтрация по критерию
-                            select w.id_word;
-            var lerntWords = from w in entities.Lernt_words// определяем каждый объект из teams как t
-                                 where w.id_user.Equals(id) && w.id_theme==id_theme //фильтрация по критерию
+            }
+            else
+            {
+                var needWords = from w in entities.Words // определяем каждый объект из teams как t
+                                where w.id_theme == id_theme //фильтрация по критерию
+                                select w.id_word;
+                var lerntWords = from w in entities.Lernt_words// определяем каждый объект из teams как t
+                                 where w.id_user.Equals(id) && w.id_theme == id_theme //фильтрация по критерию
                                  select w.id_word;
-                
+
                 foreach (var n in needWords)
                 {
                     if ((lerntWords.Count() == 0) || (!lerntWords.Contains(n)))
@@ -82,11 +87,12 @@ namespace EnglishTeacher.Controllers
 
             //пересечение коллекций need lernt и его вернуть
             return new Word
-            { word1 = "Вы выучили все слова",
+            {
+                word1 = "Вы выучили все слова",
                 translate = "Выберите другую тему"
-            
+
             };
-           // return lerntWords;
+            // return lerntWords;
         }
 
         [HttpGet]
@@ -137,7 +143,39 @@ namespace EnglishTeacher.Controllers
         [Route("GetThemes")]
         public IEnumerable<Theme> GetThemes()
         {
-            return entities.Themes;
+            string id = User.Identity.GetUserId();
+            int id_theme = Convert.ToInt32(entities.AspNetUsers.SingleOrDefault(u => u.Id.Equals(id)).id_theme_day);
+            if (id_theme == 0)
+            {
+                List<Theme> themes = new List<Theme>();
+                var allthemes = from t in entities.Themes
+                                     select t;
+                foreach (var t in allthemes)
+                {
+                    themes.Add(t);
+                }
+                themes.Add(new Theme { name = "--Select--", id_theme = 0});
+                return themes;
+            }
+            else
+            {
+                var needThemes = from t in entities.Themes // определяем каждый объект из teams как t                        
+                                 where t.id_theme == id_theme
+                                 select t;
+                List<Theme> themes = new List<Theme>();
+                foreach (var t in needThemes)
+                {
+                    themes.Add(t);
+                }
+                needThemes = from t in entities.Themes // определяем каждый объект из teams как t                        
+                             where t.id_theme != id_theme
+                             select t;
+                foreach (var t in needThemes)
+                {
+                    themes.Add(t);
+                }
+                return themes;
+            }
         }
 
 

@@ -7,12 +7,9 @@
         };
         $.ajax({
             type: 'POST',
-            url: 'https://lab.group.3.b2bfamily.com/Token',
+            url: 'http://localhost:54049/Token',
             data: loginData,
             success: eventSuccess,
-            fail: function (data) {
-                alert(data.responseText);
-            },
             error: eventError
         });
     }
@@ -25,13 +22,10 @@
         };
         $.ajax({
             type: 'POST',
-            url: 'https://lab.group.3.b2bfamily.com/api/Account/Register/',
+            url: 'http://localhost:54049/api/Account/Register/',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data),
             success: eventSuccess,
-            fail: function (data) {
-                alert(data.responseText);
-            },
             error: eventError
         });
     }
@@ -42,13 +36,10 @@
         };
         $.ajax({
             type: 'POST',
-            url: 'https://lab.group.3.b2bfamily.com/api/Account/ForgotPassword/',
+            url: 'http://localhost:54049/api/Account/ForgotPassword/',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data),
             success: eventSuccess,
-            fail: function (data) {
-                alert(data.responseText);
-            },
             error: eventError
         });
     }
@@ -59,16 +50,13 @@
         };
         $.ajax({
             type: 'POST',
-            url: 'https://lab.group.3.b2bfamily.com/api/Models/SaveTheme/',
+            url: 'http://localhost:54049/api/Models/SaveTheme/',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data),
             beforeSend: function (xhr) {
                 xhr.setRequestHeader("Authorization", "Bearer " + token);
             },
             success: eventSuccess,
-            fail: function (data) {
-                alert(data.responseText);
-            },
             error: eventError
         });
     }
@@ -76,7 +64,7 @@
 	this.getNewWord = function getNewWord(token, eventSuccess, eventError) {
 		$.ajax({
             type: 'GET',
-            url: 'https://lab.group.3.b2bfamily.com/api/Models/GetWordWithUser',
+            url: 'http://localhost:54049/api/Models/GetWordWithUser',
             beforeSend: function (xhr) {
                 xhr.setRequestHeader("Authorization", "Bearer " + token);
             },
@@ -85,10 +73,13 @@
         });
     }
 	
-	this.getThemes = function getNewThemes( eventSuccess, eventError) {
+	this.getThemes = function getNewThemes(token, eventSuccess, eventError) {
 		$.ajax({
             type: 'GET',
-            url: 'https://lab.group.3.b2bfamily.com/api/Models/GetThemes',
+            url: 'http://localhost:54049/api/Models/GetThemes',
+			 beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
             success: eventSuccess,
             error: eventError
         });
@@ -99,7 +90,7 @@
             Word: word,
         };
 		$.ajax({
-            url: 'https://lab.group.3.b2bfamily.com/api/Models/SaveWord/',
+            url: 'http://localhost:54049/api/Models/SaveWord/',
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data),
